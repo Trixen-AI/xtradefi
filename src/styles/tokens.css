@@ -1,0 +1,57 @@
+/* xTradeFi design tokens. Neutral roles follow the reference grid; brand roles are xTradeFi's own:
+   the gradient runs from call green to put coral, the range an option lives in. */
+:root {
+  --bg: #0a0b0d;
+  --bg-raised: #111214;
+  --divider: #34363a;
+  --text: #eef0e6;
+  --text-60: rgba(238, 240, 230, 0.6);
+  --text-35: rgba(238, 240, 230, 0.35);
+  --muted: #86887f;
+  --light: #d7d9cf;
+
+  --call-a: #19e3a0;
+  --call-b: #b7f23a;
+  --put-a: #ffb627;
+  --put-b: #ff5b4a;
+  --grad-call: linear-gradient(90deg, var(--call-a), var(--call-b));
+  --grad-put: linear-gradient(90deg, var(--put-a), var(--put-b));
+  --grad-full: linear-gradient(90deg, var(--call-a), var(--call-b) 40%, var(--put-a) 70%, var(--put-b));
+
+  --font-sans: 'Space Grotesk', Arial, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, monospace;
+
+  /* grid: 1440 → 32 | 213 | 950 | 213 | 32 */
+  --pad: 32px;
+  --col-side: 213px;
+  --col-mid: 950px;
+  --line-left: 245px;
+  --line-right: calc(100vw - 245px);
+  --header-h: 66px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1279px) {
+  :root {
+    --line-left: 17vw;
+    --line-right: 83vw;
+  }
+}
+
+@media (max-width: 991px) {
+  :root {
+    --pad: 32px;
+    --line-left: 32px;
+    --line-right: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --pad: 16px;
+    --line-left: 16px;
+    --line-right: calc(100vw - 16px);
+    --header-h: 58px;
+  }
+}
