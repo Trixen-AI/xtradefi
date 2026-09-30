@@ -5,7 +5,7 @@ export const LINKS = {
   docs: '/docs',
   terms: '#terms',
   privacy: '#privacy',
-  x: 'https://x.com/xTradeFi',
+  x: 'https://x.com/xTradeFi_xyz',
 }
 
 export type NavItem = { label: string; href: string; menu?: { title: string; links: { label: string; href: string; muted?: boolean }[]; cta: string }[] }
@@ -309,7 +309,7 @@ export const CTA = {
 }
 
 /* Community links. X is the only channel for now; add more entries here (key, label, href) when they exist. */
-export const SOCIALS = [{ key: 'x', label: 'X', href: LINKS.x, pre: 'Follow on', handle: '@xTradeFi' }]
+export const SOCIALS = [{ key: 'x', label: 'X', href: LINKS.x, pre: 'Follow on', handle: '@xTradeFi_xyz' }]
 
 export const FOOTER = {
   subscribe: 'Get launch updates*',

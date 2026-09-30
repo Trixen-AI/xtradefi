@@ -29,7 +29,7 @@ export function Faq() {
             <br />
             {FAQ.side[1]}
             <a href={LINKS.x} target="_blank" rel="noopener noreferrer">
-              @xTradeFi
+              @xTradeFi_xyz
             </a>
             .
           </p>
