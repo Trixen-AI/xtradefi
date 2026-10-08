@@ -3,7 +3,7 @@ import { NETWORK } from '@/config/network'
 import { MARKETS } from '@/data/site'
 import { Callout, KeyValues, Steps } from './parts'
 
-// xTradeFi documentation. One source for the sidebar, the page body, the on-page contents and prev/next links.
+// QuiverFi documentation. One source for the sidebar, the page body, the on-page contents and prev/next links.
 // Copy rules: facts come from the product concept; nothing here states protocol parameters that are not decided.
 // No em dashes.
 
@@ -23,15 +23,15 @@ export const DOC_GROUPS: DocGroup[] = [
       {
         slug: 'introduction',
         title: 'Introduction',
-        lead: 'xTradeFi is an on-chain options protocol for tokenized stocks. Write or buy options on NVDA, AAPL, TSLA and 20+ more without a brokerage account, a margin account or KYC.',
+        lead: 'QuiverFi is an on-chain options protocol for tokenized stocks. Write or buy options on NVDA, AAPL, TSLA and 20+ more without a brokerage account, a margin account or KYC.',
         sections: [
           {
             id: 'what-it-does',
-            title: 'What xTradeFi does',
+            title: 'What QuiverFi does',
             body: (
               <>
                 <p>
-                  Tokenized stocks are tokens that track the price of a listed share. xTradeFi lets you put an option on top of them: sell a call against stock tokens you hold, sell a put backed by stablecoins, take a simple up-or-down position, or let a vault write calls for you.
+                  Tokenized stocks are tokens that track the price of a listed share. QuiverFi lets you put an option on top of them: sell a call against stock tokens you hold, sell a put backed by stablecoins, take a simple up-or-down position, or let a vault write calls for you.
                 </p>
                 <p>Every position lives in a smart contract from the moment it opens until it settles. At expiry the contract reads the Chainlink oracle price and pays out in the same transaction.</p>
               </>
@@ -68,24 +68,24 @@ export const DOC_GROUPS: DocGroup[] = [
       {
         slug: 'getting-started',
         title: 'Getting started',
-        lead: 'Everything you need before your first position: an EVM wallet, the Robinhood Chain network and some USDG.',
+        lead: 'Everything you need before your first position: an EVM wallet on Ethereum and some USDG.',
         sections: [
           {
             id: 'connect',
             title: 'Connect a wallet',
             body: (
               <>
-                <p>xTradeFi works with any EVM wallet. Open the app, choose Connect wallet and approve the connection in your wallet. There is no account to create.</p>
+                <p>QuiverFi works with any EVM wallet. Open the app, choose Connect wallet and approve the connection in your wallet. There is no account to create.</p>
                 <Callout>The app only asks your wallet to connect and, when you trade, to sign transactions you review first. It never asks for your recovery phrase.</Callout>
               </>
             ),
           },
           {
             id: 'network',
-            title: 'Switch to Robinhood Chain',
+            title: 'Switch to Ethereum',
             body: (
               <p>
-                xTradeFi runs on {NETWORK.name} (chain ID {NETWORK.chainId}). If your wallet is on another network, the app shows a Switch network button that asks your wallet to change or add the network. See <a href="/docs/network">Network</a> for the full parameters.
+                QuiverFi runs on {NETWORK.name} (chain ID {NETWORK.chainId}). If your wallet is on another network, the app shows a Switch network button that asks your wallet to change or add the network. See <a href="/docs/network">Network</a> for the full parameters.
               </p>
             ),
           },
@@ -265,7 +265,8 @@ export const DOC_GROUPS: DocGroup[] = [
                   ['Trading', '24/5'],
                   ['Price updates', 'Every 30 seconds, plus deviation triggers'],
                   ['Price source', 'Chainlink price feeds'],
-                  ['New markets', 'Added regularly'],
+                  ['Stock tokens', 'Ondo Global Markets tokens (NVDAon, TSLAon…), non-rebasing'],
+                  ['New markets', 'Added as Chainlink feeds go live on Ethereum'],
                 ]}
               />
             ),
@@ -361,14 +362,14 @@ export const DOC_GROUPS: DocGroup[] = [
           {
             id: 'gas',
             title: 'Network fees',
-            body: <p>Transactions on {NETWORK.name} also cost network gas, paid by your wallet to the network, not to xTradeFi.</p>,
+            body: <p>Transactions on {NETWORK.name} also cost network gas, paid by your wallet to the network, not to QuiverFi.</p>,
           },
         ],
       },
       {
         slug: 'network',
         title: 'Network',
-        lead: `xTradeFi runs on ${NETWORK.name}.`,
+        lead: `QuiverFi runs on ${NETWORK.name}.`,
         sections: [
           {
             id: 'parameters',
@@ -391,7 +392,7 @@ export const DOC_GROUPS: DocGroup[] = [
           {
             id: 'contracts',
             title: 'Contracts',
-            body: <p>The xTradeFi contract addresses will be listed on this page at launch. Only trust addresses published here and on the official X account.</p>,
+            body: <p>The QuiverFi contract addresses will be listed on this page at launch. Only trust addresses published here and on the official X account.</p>,
           },
         ],
       },
@@ -430,7 +431,7 @@ export const DOC_GROUPS: DocGroup[] = [
           {
             id: 'assets',
             title: 'About tokenized stocks',
-            body: <p>Tokenized stocks track share prices. Holding them does not make you a shareholder of the company, and xTradeFi is not affiliated with the companies whose shares are tracked.</p>,
+            body: <p>Tokenized stocks track share prices. Holding them does not make you a shareholder of the company, and QuiverFi is not affiliated with the companies whose shares are tracked.</p>,
           },
         ],
       },

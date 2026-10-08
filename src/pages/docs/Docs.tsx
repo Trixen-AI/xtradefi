@@ -88,7 +88,7 @@ export default function Docs() {
   const active = useActiveHeading(ids)
 
   useEffect(() => {
-    if (page) setPageMeta({ title: `${page.title} · xTradeFi Docs`, description: page.lead, path: `/docs/${page.slug}` })
+    if (page) setPageMeta({ title: `${page.title} · QuiverFi Docs`, description: page.lead, path: `/docs/${page.slug}` })
     return () => setPageMeta({})
   }, [page])
 
@@ -103,7 +103,7 @@ export default function Docs() {
   return (
     <div className="docs">
       <header className="docs-header">
-        <a className="docs-header__logo" href="/" aria-label="xTradeFi home">
+        <a className="docs-header__logo" href="/" aria-label="QuiverFi home">
           <Logo className="docs-header__logo-svg" />
         </a>
         <div className="docs-header__mid">
@@ -231,7 +231,7 @@ export default function Docs() {
       </div>
 
       <footer className="docs-footer">
-        <span>© 2026 xTradeFi · On-chain options on tokenized stocks</span>
+        <span>© 2026 QuiverFi · On-chain options on tokenized stocks</span>
         <a href="/">Back to the website</a>
       </footer>
     </div>

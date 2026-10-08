@@ -1,4 +1,4 @@
-// Builds the xTradeFi logo from one source: the mark geometry below + the wordmark outlined from
+// Builds the QuiverFi logo from one source: the mark geometry below + the wordmark outlined from
 // Space Grotesk 500 (opentype.js). Writes public/brand/*, public/favicon.svg and src/components/brand/logoPaths.ts,
 // then renders the 500x500 PNG exports with resvg.
 import fs from 'node:fs'
@@ -36,7 +36,7 @@ const buf = fs.readFileSync(fontFile)
 const font = opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength))
 const SIZE = 40
 const TRACK = -0.4 // px at SIZE, slight tightening
-const word = 'xTradeFi'
+const word = 'QuiverFi'
 // Outline each glyph once at the origin, then offset copies of its commands. Calling getPath repeatedly on the
 // same glyph with an x offset produced NaN coordinates in opentype.js 2.0.
 const glyphs = font.stringToGlyphs(word)
@@ -76,9 +76,9 @@ const GAP = 12
 const lockW = 48 + GAP + wordW
 const wordY = 24 - (wordTop + wordH / 2)
 const lockup = (id, ink) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockW} 48" width="${lockW}" height="48" fill="none" role="img" aria-label="xTradeFi"><defs>${markDefs(id)}</defs>${markBody(id, ink)}<g transform="translate(${48 + GAP - bb.x1} ${wordY.toFixed(2)})"><path d="${wordD}" fill="${ink}"/></g></svg>`
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockW} 48" width="${lockW}" height="48" fill="none" role="img" aria-label="QuiverFi"><defs>${markDefs(id)}</defs>${markBody(id, ink)}<g transform="translate(${48 + GAP - bb.x1} ${wordY.toFixed(2)})"><path d="${wordD}" fill="${ink}"/></g></svg>`
 const markSvg = (id, ink) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" role="img" aria-label="xTradeFi"><defs>${markDefs(id)}</defs>${markBody(id, ink)}</svg>`
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" role="img" aria-label="QuiverFi"><defs>${markDefs(id)}</defs>${markBody(id, ink)}</svg>`
 
 fs.mkdirSync(out('public/brand'), { recursive: true })
 fs.writeFileSync(out('public/brand/logo.svg'), lockup('xs', INK))

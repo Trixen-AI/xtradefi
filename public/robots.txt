@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /app
 
-Sitemap: https://xtradefi.org/sitemap.xml
+Sitemap: https://quiverfi.org/sitemap.xml

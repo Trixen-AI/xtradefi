@@ -3,8 +3,8 @@ import { MARK_CALL, MARK_PUT, MARK_TILE, WORD_BOX, WORD_D } from './logoPaths'
 
 type Props = { className?: string; mark?: boolean; ink?: string; title?: string }
 
-/** xTradeFi logo, inline SVG. Mark + outlined wordmark (Space Grotesk 500), built by scripts/build-logo.mjs. */
-export function Logo({ className = '', mark = false, ink = 'var(--text)', title = 'xTradeFi' }: Props) {
+/** QuiverFi logo, inline SVG. Mark + outlined wordmark (Space Grotesk 500), built by scripts/build-logo.mjs. */
+export function Logo({ className = '', mark = false, ink = 'var(--text)', title = 'QuiverFi' }: Props) {
   const id = useId().replace(/:/g, '')
   const w = mark ? 48 : WORD_BOX.w
   return (

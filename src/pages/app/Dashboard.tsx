@@ -16,7 +16,7 @@ import './app.css'
 /** /app: wallet providers live only here, so the website never loads them. */
 export default function Dashboard() {
   useEffect(() => {
-    setPageMeta({ title: 'App · xTradeFi', description: 'Connect an EVM wallet to write covered calls, sell puts, take binary positions and use the yield vault on Robinhood Chain.', path: '/app', noindex: true })
+    setPageMeta({ title: 'App · QuiverFi', description: 'Connect an EVM wallet to write covered calls, sell puts, take binary positions and use the yield vault on Ethereum.', path: '/app', noindex: true })
     return () => setPageMeta({})
   }, [])
   return (

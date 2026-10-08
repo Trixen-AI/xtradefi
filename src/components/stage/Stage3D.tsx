@@ -5,7 +5,7 @@ import { gsap, prefersReducedMotion } from '@/lib/gsap'
 import { stageFor, stageStore, type Face } from '@/lib/stageStore'
 import { faceCanvas } from './faces'
 
-// Fixed full-viewport Three.js stage. The object is xTradeFi's emblem: a thick chamfered tile (cut top-left and
+// Fixed full-viewport Three.js stage. The object is QuiverFi's emblem: a thick chamfered tile (cut top-left and
 // bottom-right corners, like the logo) whose face shows the payoff of the product in view. In the settlement
 // section it becomes an oracle coin. Sections not showing it fade it out and drop it 450px, like the reference.
 

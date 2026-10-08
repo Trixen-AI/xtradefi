@@ -1,7 +1,7 @@
 import { useAppKit } from '@reown/appkit/react'
 import { useBalance, useSwitchChain } from 'wagmi'
 import { useWallet } from '../hooks/useWallet'
-import { robinhoodChain } from '../wallet/chain'
+import { ethereumChain } from '../wallet/chain'
 import { hasProjectId } from '../wallet/appkit'
 import { fmtNum, shortAddr } from '../lib/format'
 
@@ -11,7 +11,7 @@ import { fmtNum, shortAddr } from '../lib/format'
 function AppKitAccountButton() {
   const { open } = useAppKit()
   const { address, isConnected, busy } = useWallet()
-  const eth = useBalance({ address, chainId: robinhoodChain.id, query: { enabled: !!address, refetchInterval: 30_000 } })
+  const eth = useBalance({ address, chainId: ethereumChain.id, query: { enabled: !!address, refetchInterval: 30_000 } })
   if (!isConnected) {
     return (
       <button type="button" className="dbtn dbtn--primary" onClick={() => open({ view: 'Connect', namespace: 'eip155' })} disabled={busy}>
@@ -56,8 +56,8 @@ export function ConnectCta(props: { label?: string; className?: string }) {
 export function SwitchChainButton({ className = '' }: { className?: string }) {
   const { switchChain, isPending } = useSwitchChain()
   return (
-    <button type="button" className={`dbtn dbtn--primary ${className}`} disabled={isPending} onClick={() => switchChain({ chainId: robinhoodChain.id })}>
-      {isPending ? 'Check your wallet…' : `Switch to ${robinhoodChain.name}`}
+    <button type="button" className={`dbtn dbtn--primary ${className}`} disabled={isPending} onClick={() => switchChain({ chainId: ethereumChain.id })}>
+      {isPending ? 'Check your wallet…' : `Switch to ${ethereumChain.name}`}
     </button>
   )
 }

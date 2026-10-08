@@ -1,6 +1,6 @@
 import { useDeferredValue, useMemo, useState } from 'react'
 import { MARKET_LIST } from '../data/tokens'
-import { feedState, useNow, useOracles, useWalletBalances } from '../hooks/chainData'
+import { feedState, useNow, useOracles, useSValues, useWalletBalances } from '../hooks/chainData'
 import { ago, fmtNum, fmtUsd } from '../lib/format'
 import { useWallet } from '../hooks/useWallet'
 import { Panel, Skel, StateTag, TickerBadge } from '../components/ui'
@@ -13,6 +13,7 @@ export default function Markets() {
   const now = useNow()
   const { quotes, isLoading, isError } = useOracles()
   const { balances } = useWalletBalances(address)
+  const sValues = useSValues()
   const [query, setQuery] = useState('')
   const [sector, setSector] = useState<(typeof SECTORS)[number]>('All')
   const [tradableOnly, setTradableOnly] = useState(false)
@@ -23,14 +24,14 @@ export default function Markets() {
     const list = MARKET_LIST.map((m) => {
       const quote = quotes.get(m.ticker)
       const bal = balances.get(m.ticker)?.amount ?? 0
-      return { m, quote, bal, value: quote ? bal * quote.price : undefined }
+      return { m, quote, bal, value: quote ? bal * quote.price * (sValues.get(m.ticker) ?? 1) : undefined }
     }).filter(({ m }) => (sector === 'All' || m.sector === sector) && (!tradableOnly || m.tradable) && (!q || `${m.ticker} ${m.name}`.toLowerCase().includes(q)))
     return list.toSorted((a, b) => {
       if (sort === 'price') return (b.quote?.price ?? -1) - (a.quote?.price ?? -1)
       if (sort === 'value') return (b.value ?? -1) - (a.value ?? -1)
       return a.m.ticker.localeCompare(b.m.ticker)
     })
-  }, [quotes, balances, sector, tradableOnly, q, sort])
+  }, [quotes, balances, sValues, sector, tradableOnly, q, sort])
 
   const tradable = MARKET_LIST.filter((m) => m.tradable).length
 
@@ -39,9 +40,9 @@ export default function Markets() {
       <header className="dview__head">
         <div>
           <p className="dview__pre">Markets</p>
-          <h1 className="dview__title">Tokenized stocks on Robinhood Chain</h1>
+          <h1 className="dview__title">Tokenized stocks on Ethereum</h1>
           <p className="dview__sub">
-            {MARKET_LIST.length} stock tokens · {tradable} with a Chainlink feed and open for options · prices refresh every 30s
+            {MARKET_LIST.length} Ondo stock tokens · {tradable} with a Chainlink feed on Ethereum and open for options · prices refresh every 30s
           </p>
         </div>
       </header>
@@ -79,7 +80,7 @@ export default function Markets() {
       </div>
 
       <Panel pad={false}>
-        {isError ? <p className="dtable-error">Could not reach Robinhood Chain. Retrying automatically.</p> : null}
+        {isError ? <p className="dtable-error">Could not reach Ethereum. Retrying automatically.</p> : null}
         <div className="dtable-wrap">
           <table className="dtable dtable--markets">
             <thead>
@@ -130,7 +131,7 @@ export default function Markets() {
           {!rows.length ? <p className="dtable-error">No market matches these filters.</p> : null}
         </div>
       </Panel>
-      <p className="dfoot">Prices are Chainlink answers read directly from Robinhood Chain. Markets marked “No feed” have a stock token but no Chainlink feed yet, so options on them are not available.</p>
+      <p className="dfoot">Prices are Chainlink answers read directly from Ethereum. Markets marked “No feed” have a stock token but no Chainlink feed yet, so options on them are not available.</p>
     </div>
   )
 }

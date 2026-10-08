@@ -39,7 +39,7 @@ export function Overview() {
   return (
     <section className="overview" id="overview" data-section="overview">
       <div className="overview-slider-wrap">
-        <div className="overview-slider" role="region" aria-label="What xTradeFi offers" aria-roledescription="carousel">
+        <div className="overview-slider" role="region" aria-label="What QuiverFi offers" aria-roledescription="carousel">
           <div className="overview-slider__track" style={{ transform: `translateX(calc(${index} * -1 * var(--slide-w)))`, transition: animate ? `transform ${DURATION}ms ease` : 'none' }}>
             {slides.map((label, i) => (
               <div key={i} className={`overview-slide ${i % items.length === active && i >= index ? 'is-active' : ''}`} aria-hidden={i % items.length !== active}>

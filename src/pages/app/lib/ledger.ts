@@ -37,7 +37,7 @@ export type Ledger = {
 
 const VERSION = 1
 const EMPTY: Ledger = { approvals: {}, positions: [], vault: [], nonce: 0 }
-const keyFor = (owner: Address) => `xtradefi:v${VERSION}:ledger:${owner.toLowerCase()}`
+const keyFor = (owner: Address) => `quiverfi:v${VERSION}:ledger:${owner.toLowerCase()}`
 
 const cache = new Map<string, Ledger>()
 const listeners = new Set<() => void>()
@@ -71,7 +71,7 @@ function write(owner: Address, next: Ledger) {
 function subscribe(l: () => void) {
   listeners.add(l)
   const onStorage = (e: StorageEvent) => {
-    if (e.key?.startsWith(`xtradefi:v${VERSION}:ledger:`)) {
+    if (e.key?.startsWith(`quiverfi:v${VERSION}:ledger:`)) {
       cache.delete(e.key)
       l()
     }

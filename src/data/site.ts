@@ -1,11 +1,11 @@
-// All page copy and lists in one place. Written for xTradeFi; no em dashes anywhere in this file.
+// All page copy and lists in one place. Written for QuiverFi; no em dashes anywhere in this file.
 
 export const LINKS = {
   app: '/app',
   docs: '/docs',
   terms: '#terms',
   privacy: '#privacy',
-  x: 'https://x.com/xTradeFi_xyz',
+  x: 'https://x.com/QuiverFi_',
 }
 
 export type NavItem = { label: string; href: string; menu?: { title: string; links: { label: string; href: string; muted?: boolean }[]; cta: string }[] }
@@ -32,10 +32,10 @@ export const NAV: NavItem[] = [
     label: 'Markets',
     href: '#markets',
     menu: [
-      { title: 'Tech', links: [{ label: 'NVDA · NVIDIA', href: '#markets' }, { label: 'AAPL · Apple', href: '#markets' }, { label: 'MSFT · Microsoft', href: '#markets' }, { label: 'GOOGL · Alphabet', href: '#markets' }], cta: 'All tech' },
-      { title: 'Fintech', links: [{ label: 'COIN · Coinbase', href: '#markets' }, { label: 'MSTR · MicroStrategy', href: '#markets' }], cta: 'All fintech' },
+      { title: 'Stocks', links: [{ label: 'NVDA · NVIDIA', href: '#markets' }, { label: 'TSLA · Tesla', href: '#markets' }, { label: 'GOOGL · Alphabet', href: '#markets' }], cta: 'All stocks' },
       { title: 'Index ETFs', links: [{ label: 'SPY · S&P 500 ETF', href: '#markets' }, { label: 'QQQ · QQQ ETF', href: '#markets' }], cta: 'All ETFs' },
-      { title: 'Feed details', links: [{ label: '24/5 trading', href: '#markets' }, { label: '30-second updates', href: '#markets' }, { label: 'More markets soon', href: '#markets', muted: true }], cta: 'Browse markets' },
+      { title: 'Coming next', links: [{ label: 'AAPL · Apple', href: '#markets', muted: true }, { label: 'MSFT · Microsoft', href: '#markets', muted: true }, { label: 'AMZN · Amazon', href: '#markets', muted: true }, { label: 'META · Meta', href: '#markets', muted: true }], cta: 'Listed tokens' },
+      { title: 'Feed details', links: [{ label: '24/5 trading', href: '#markets' }, { label: 'Chainlink on Ethereum', href: '#markets' }, { label: 'More markets soon', href: '#markets', muted: true }], cta: 'Browse markets' },
     ],
   },
   { label: 'How it works', href: '#how-it-works' },
@@ -48,7 +48,7 @@ export const PRODUCT_TILES = [
   { name: 'Puts', sub: 'Cash-secured puts', href: '#products', tone: 'put' },
   { name: 'Binary', sub: 'Up or down bets', href: '#products', tone: 'mix' },
   { name: 'Vault', sub: 'Auto-written yield', href: '#products', tone: 'call' },
-  { name: 'Markets', sub: '16 tokenized stocks', href: '#markets', tone: 'mix' },
+  { name: 'Markets', sub: '5 tokenized markets', href: '#markets', tone: 'mix' },
   { name: 'Docs', sub: 'Protocol reference', href: LINKS.docs, tone: 'put' },
 ] as const
 
@@ -71,16 +71,16 @@ export const SECTIONS = [
 export const HERO_ORDERS = [
   { prompt: 'Sell a 7-day covered call on my NVDA tokens', status: 'Writing on…', tool: 'Covered call', rows: ['Collateral: NVDA tokens', 'Premium paid in USDG', 'Custom strike', 'Settles at expiry'] },
   { prompt: 'Write a cash-secured put on TSLA at my strike', status: 'Locking…', tool: 'Cash-secured put', rows: ['Collateral: USDG', 'Premium paid upfront', 'Buy the dip at strike', 'Oracle-priced expiry'] },
-  { prompt: 'Bet AAPL closes above today’s price by Friday', status: 'Opening…', tool: 'Binary option', rows: ['Pick up or down', 'Near 2x payout', 'Fixed stake', 'Paid out on-chain'] },
+  { prompt: 'Bet GOOGL closes above today’s price by Friday', status: 'Opening…', tool: 'Binary option', rows: ['Pick up or down', 'Near 2x payout', 'Fixed stake', 'Paid out on-chain'] },
   { prompt: 'Put my idle USDG to work on autopilot', status: 'Depositing…', tool: 'Yield vault', rows: ['Auto-written calls', 'Compounding premium', 'No active management', 'Withdraw any time'] },
   { prompt: 'Settle my QQQ position at the oracle price', status: 'Settling via…', tool: 'Chainlink oracle', rows: ['Price pulled on-chain', 'Same-call settlement', 'Instant payout', 'No manual steps'] },
 ]
 
 export const HERO = {
-  pre: 'Meet xTradeFi',
+  pre: 'Meet QuiverFi',
   top: 'On-chain',
   bottom: 'Options',
-  side: 'Covered calls, cash-secured puts and binary bets on 16 tokenized stocks.',
+  side: 'Covered calls, cash-secured puts and binary bets on tokenized NVDA, TSLA, GOOGL, SPY and QQQ.',
   scroll: 'Scroll',
 }
 
@@ -104,7 +104,7 @@ export const TRACK = {
 export const HIGHLIGHTS = {
   label: 'Built for',
   items: [
-    { big: '16', title: 'Tokenized stock markets', sub: 'NVDA, AAPL, TSLA and more', icon: 'grid' },
+    { big: '5', title: 'Tokenized markets', sub: 'NVDA, TSLA, GOOGL, SPY, QQQ', icon: 'grid' },
     { big: '4', title: 'Product types', sub: 'Calls, puts, binaries, vault', icon: 'stack' },
     { big: '0.5%', title: 'Protocol fee', sub: 'Per trade, nothing hidden', icon: 'fee' },
     { big: '30s', title: 'Price updates', sub: 'Chainlink feeds, 24/5', icon: 'pulse' },
@@ -156,7 +156,7 @@ export const STEPS = {
   more: 'From wallet to position',
   items: [
     { n: '01', title: 'Connect your wallet', body: 'Any EVM wallet works. No account to create, no email, no KYC. Connect and you are in.', chips: ['EVM wallet', 'No email', 'No sign-up'], art: 'wallet' },
-    { n: '02', title: 'Pick a product and market', body: 'Covered call, put, binary or vault. Then a stock, a strike and an expiry. One stablecoin balance covers margin everywhere.', chips: ['16 stocks', 'Custom strikes', 'One balance'], art: 'pick' },
+    { n: '02', title: 'Pick a product and market', body: 'Covered call, put, binary or vault. Then a stock, a strike and an expiry. One stablecoin balance covers margin everywhere.', chips: ['5 markets', 'Custom strikes', 'One balance'], art: 'pick' },
     { n: '03', title: 'Settle on the oracle price', body: 'At expiry, Chainlink delivers the final price on-chain and the contract settles every position automatically.', chips: ['Chainlink oracles', 'Auto-settlement', 'Trustless'], art: 'settle' },
   ],
 }
@@ -186,7 +186,7 @@ export const FEES = {
     { name: 'Yield Vault', icon: 'vault', rows: [['Protocol fee', '0.5%'], ['Deposit', 'USDG']] },
   ],
   info: [
-    { name: 'Network', icon: 'network', rows: [['Chain', 'Robinhood Chain'], ['Chain ID', '4663']] },
+    { name: 'Network', icon: 'network', rows: [['Chain', 'Ethereum'], ['Chain ID', '1']] },
     { name: 'Oracle', icon: 'oracle', rows: [['Provider', 'Chainlink'], ['Price update', '30 seconds']] },
     { name: 'Settlement', icon: 'settle', rows: [['Mode', 'Automated · on-chain'], ['Payout', 'Same call']] },
   ],
@@ -200,7 +200,7 @@ export const SETTLE = {
   feats: ['Feeds update every 30s', 'Deviation triggers', 'Price pulled at expiry', 'Settled in the same call', 'Payout sent instantly', 'No manual step'],
   pricedBy: 'Priced by:',
   runsOn: 'Markets:',
-  marquee: ['NVDA', 'AAPL', 'TSLA', 'AMZN', 'MSFT', 'GOOGL', 'META', 'AMD', 'PLTR', 'GME', 'QQQ', 'SPY', 'COIN', 'MSTR', 'INTC', 'BABA'],
+  marquee: ['NVDA', 'TSLA', 'GOOGL', 'SPY', 'QQQ', 'NVDA', 'TSLA', 'GOOGL', 'SPY', 'QQQ'],
 }
 
 export const GUIDES = {
@@ -213,7 +213,7 @@ export const GUIDES = {
       { tag: 'Basics', time: '4 min read', title: 'What an on-chain option is, and what it is not', art: 'a' },
       { tag: 'Basics', time: '3 min read', title: 'Strike, expiry and premium in one picture', art: 'b' },
       { tag: 'Basics', time: '5 min read', title: 'Tokenized stocks: what you actually hold', art: 'c' },
-      { tag: 'Basics', time: '2 min read', title: 'Connecting a wallet on Robinhood Chain', art: 'd' },
+      { tag: 'Basics', time: '2 min read', title: 'Connecting a wallet on Ethereum', art: 'd' },
     ],
     strategies: [
       { tag: 'Strategy', time: '6 min read', title: 'Covered calls on stock tokens you already own', art: 'b' },
@@ -228,39 +228,38 @@ export const GUIDES = {
       { tag: 'Risk', time: '2 min read', title: 'Checking a contract before you sign', art: 'b' },
     ],
   },
-  by: 'xTradeFi docs',
+  by: 'QuiverFi docs',
 }
 
-/** o: options available (the stock token has a Chainlink feed on Robinhood Chain). Tokens without a feed are
+/** o: options available (the stock token has a Chainlink feed on Ethereum). Tokens without a feed are
  *  listed for the dashboard and docs but not offered on the landing page. */
 export type Market = { t: string; n: string; s: 'Tech' | 'Fintech' | 'ETF' | 'Consumer'; o: boolean }
 export const MARKETS = {
-  headBoxed: '16',
-  headTop: 'stocks.',
+  headBoxed: '5',
+  headTop: 'markets.',
   headBottom: 'One balance.',
   side: 'Options on the most liquid tokenized stocks, priced by Chainlink with 30-second updates, 24/5.',
   filters: ['All', 'Tech', 'Fintech', 'ETF', 'Consumer'] as const,
   list: [
     { t: 'NVDA', n: 'NVIDIA', s: 'Tech', o: true },
-    { t: 'AAPL', n: 'Apple', s: 'Tech', o: true },
     { t: 'TSLA', n: 'Tesla', s: 'Consumer', o: true },
-    { t: 'AMZN', n: 'Amazon', s: 'Consumer', o: true },
-    { t: 'MSFT', n: 'Microsoft', s: 'Tech', o: true },
     { t: 'GOOGL', n: 'Alphabet', s: 'Tech', o: true },
-    { t: 'META', n: 'Meta', s: 'Tech', o: true },
-    { t: 'AMD', n: 'AMD', s: 'Tech', o: true },
-    { t: 'PLTR', n: 'Palantir', s: 'Tech', o: true },
-    { t: 'GME', n: 'GameStop', s: 'Consumer', o: true },
-    { t: 'QQQ', n: 'QQQ ETF', s: 'ETF', o: true },
     { t: 'SPY', n: 'S&P 500 ETF', s: 'ETF', o: true },
-    { t: 'COIN', n: 'Coinbase', s: 'Fintech', o: true },
-    { t: 'MSTR', n: 'MicroStrategy', s: 'Fintech', o: true },
-    { t: 'INTC', n: 'Intel', s: 'Tech', o: true },
-    { t: 'BABA', n: 'Alibaba', s: 'Consumer', o: true },
+    { t: 'QQQ', n: 'QQQ ETF', s: 'ETF', o: true },
+    { t: 'AAPL', n: 'Apple', s: 'Tech', o: false },
+    { t: 'AMZN', n: 'Amazon', s: 'Consumer', o: false },
+    { t: 'MSFT', n: 'Microsoft', s: 'Tech', o: false },
+    { t: 'META', n: 'Meta', s: 'Tech', o: false },
+    { t: 'AMD', n: 'AMD', s: 'Tech', o: false },
+    { t: 'PLTR', n: 'Palantir', s: 'Tech', o: false },
+    { t: 'GME', n: 'GameStop', s: 'Consumer', o: false },
+    { t: 'COIN', n: 'Coinbase', s: 'Fintech', o: false },
+    { t: 'MSTR', n: 'MicroStrategy', s: 'Fintech', o: false },
+    { t: 'INTC', n: 'Intel', s: 'Tech', o: false },
+    { t: 'BABA', n: 'Alibaba', s: 'Consumer', o: false },
     { t: 'NFLX', n: 'Netflix', s: 'Consumer', o: false },
     { t: 'SHOP', n: 'Shopify', s: 'Consumer', o: false },
     { t: 'SNOW', n: 'Snowflake', s: 'Tech', o: false },
-    { t: 'RBLX', n: 'Roblox', s: 'Consumer', o: false },
   ] as Market[],
   groups: [
     { label: 'Trading hours', count: '24/5' },
@@ -278,19 +277,19 @@ export const FAQ = {
   tabs: ['The basics', 'Settlement', 'Risk'],
   items: [
     [
-      { q: 'What is an on-chain option?', a: 'An option is a contract that gives the buyer the right, but not the obligation, to buy or sell an asset at a set price before a set date. On xTradeFi the whole lifecycle runs in smart contracts: creation, margin, expiry and settlement. No counterparty can default and nobody can freeze your funds.' },
-      { q: 'What do I need to start?', a: 'An EVM wallet on Robinhood Chain and some USDG. To write covered calls you also need the stock tokens you want to write against. There is no sign-up and no KYC.' },
-      { q: 'Do I own the underlying stocks?', a: 'You hold tokenized stocks: tokens that track the price of the listed share. xTradeFi lets you write and buy options on those tokens. It does not give you shareholder rights in the company itself.' },
+      { q: 'What is an on-chain option?', a: 'An option is a contract that gives the buyer the right, but not the obligation, to buy or sell an asset at a set price before a set date. On QuiverFi the whole lifecycle runs in smart contracts: creation, margin, expiry and settlement. No counterparty can default and nobody can freeze your funds.' },
+      { q: 'What do I need to start?', a: 'An EVM wallet on Ethereum and some USDG. To write covered calls you also need the stock tokens you want to write against. There is no sign-up and no KYC.' },
+      { q: 'Do I own the underlying stocks?', a: 'You hold tokenized stocks: tokens that track the price of the listed share. QuiverFi lets you write and buy options on those tokens. It does not give you shareholder rights in the company itself.' },
     ],
     [
       { q: 'How does settlement work?', a: 'Chainlink price feeds update every 30 seconds, with deviation triggers in between. At expiry the oracle price is pulled on-chain and every position in that market settles in the same call. Payouts are calculated and sent immediately, with no manual step.' },
       { q: 'What is the Yield Vault?', a: 'A pool that writes covered calls for you. You deposit USDG, the vault sells calls each cycle and rolls the premium back in, so yield compounds without you managing positions.' },
-      { q: 'Which network does xTradeFi run on?', a: 'Robinhood Chain, chain ID 4663. The main contract address will be published in the docs at launch.' },
+      { q: 'Which network does QuiverFi run on?', a: 'Ethereum mainnet, chain ID 1. The main contract address will be published in the docs at launch.' },
     ],
     [
       { q: 'Can I lose more than I deposit?', a: 'No. Every position is fully collateralized when it opens: stock tokens for covered calls, USDG for puts and binaries. The most you can lose is the collateral or stake you locked.' },
       { q: 'What does it cost?', a: 'A 0.5% protocol fee per trade. Premiums, payouts and collateral move between wallets and the contract; there is no subscription and no withdrawal fee.' },
-      { q: 'Is xTradeFi affiliated with the stocks it lists?', a: 'No. Tickers and company names identify the tokenized assets. xTradeFi is an independent protocol and is not affiliated with or endorsed by those companies.' },
+      { q: 'Is QuiverFi affiliated with the stocks it lists?', a: 'No. Tickers and company names identify the tokenized assets. QuiverFi is an independent protocol and is not affiliated with or endorsed by those companies.' },
     ],
   ],
 }
@@ -302,14 +301,14 @@ export const CTA = {
   stackLabel: 'Settles with:',
   stack: [
     { key: 'chainlink', name: 'Chainlink', handle: 'Oracle provider', body: 'Price feeds update every 30 seconds and set the final price at every expiry.' },
-    { key: 'robinhood', name: 'Robinhood Chain', handle: 'Network · ID 4663', body: 'Every position, lock and payout lives on Robinhood Chain.' },
+    { key: 'ethereum', name: 'Ethereum', handle: 'Network · Mainnet', body: 'Every position, lock and payout lives on Ethereum mainnet.' },
     { key: 'usdg', name: 'USDG', handle: 'Collateral & premium', body: 'One stablecoin balance covers margin and receives premium across all markets.' },
     { key: 'wallet', name: 'EVM wallet', handle: 'Wallet', body: 'Connect any EVM wallet. No account, no email, no KYC.' },
   ],
 }
 
 /* Community links. X is the only channel for now; add more entries here (key, label, href) when they exist. */
-export const SOCIALS = [{ key: 'x', label: 'X', href: LINKS.x, pre: 'Follow on', handle: '@xTradeFi_xyz' }]
+export const SOCIALS = [{ key: 'x', label: 'X', href: LINKS.x, pre: 'Follow on', handle: '@QuiverFi_' }]
 
 export const FOOTER = {
   subscribe: 'Get launch updates*',
@@ -321,7 +320,7 @@ export const FOOTER = {
     { title: 'Protocol', links: [['Markets', '#markets'], ['How it works', '#how-it-works'], ['Settlement', '#settlement'], ['Fees', '#fees'], ['Docs', LINKS.docs], ['FAQ', '#faq']] },
     { title: 'Legal', links: [['Terms', LINKS.terms], ['Privacy', LINKS.privacy], ['Risk disclosure', '/docs/risks']] },
   ],
-  badge: ['Network', 'Robinhood Chain · 4663'],
-  copy: 'xTradeFi · On-chain options on tokenized stocks',
+  badge: ['Network', 'Ethereum Mainnet'],
+  copy: 'QuiverFi · On-chain options on tokenized stocks',
   risk: 'Options carry risk. Tokenized stocks track share prices and do not grant shareholder rights.',
 }

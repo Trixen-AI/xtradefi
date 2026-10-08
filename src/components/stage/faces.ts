@@ -1,7 +1,7 @@
 import type { Face } from '@/lib/stageStore'
 
 // Face artwork for the 3D emblem, drawn once per face into a 1024px canvas. Each face is a payoff sketch of the
-// product it stands for, in xTradeFi's call→put palette.
+// product it stands for, in QuiverFi's call→put palette.
 const CALL_A = '#19e3a0'
 const CALL_B = '#b7f23a'
 const PUT_A = '#ffb627'

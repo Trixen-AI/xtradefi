@@ -12,11 +12,11 @@ import { BrandLogo, type BrandKey } from '@/components/brand/BrandLogo'
 
 const STACK: { cat: string; logo: BrandKey; label: string }[] = [
   { cat: 'Oracle', logo: 'chainlink', label: 'Chainlink' },
-  { cat: 'Network', logo: 'robinhood', label: 'Robinhood Chain' },
+  { cat: 'Network', logo: 'ethereum', label: 'Ethereum' },
   { cat: 'Collateral', logo: 'usdg', label: 'USDG' },
 ]
 
-/** Closed gradient outline around the ticker tile, cut at top-left and bottom-right like the xTradeFi mark. */
+/** Closed gradient outline around the ticker tile, cut at top-left and bottom-right like the QuiverFi mark. */
 function TickerFrame() {
   const id = useId().replace(/:/g, '')
   return (
@@ -33,7 +33,7 @@ function TickerFrame() {
   )
 }
 
-// Only markets with options (a Chainlink feed on Robinhood Chain) are offered on the landing page. Static data,
+// Only markets with options (a Chainlink feed on Ethereum) are offered on the landing page. Static data,
 // so it lives at module level.
 const offered = MARKETS.list.filter((m) => m.o)
 const stocks = offered.filter((m) => m.s !== 'ETF')

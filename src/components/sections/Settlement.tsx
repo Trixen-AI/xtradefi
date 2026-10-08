@@ -39,9 +39,9 @@ export function Settlement() {
             <span className="buy-cell__tag">Oracle</span>
             <ArrowUR size={20} className="buy-cell__arrow" />
           </a>
-          <a className="buy-cell" href="https://docs.robinhood.com/chain/" target="_blank" rel="noopener noreferrer">
-            <BrandLogo name="robinhood" label="Robinhood Chain" className="buy-cell__logo buy-cell__logo--feather" />
-            <span className="buy-cell__tag">Network · 4663</span>
+          <a className="buy-cell" href="https://ethereum.org" target="_blank" rel="noopener noreferrer">
+            <BrandLogo name="ethereum" label="Ethereum" className="buy-cell__logo buy-cell__logo--ethereum" />
+            <span className="buy-cell__tag">Network · Mainnet</span>
             <ArrowUR size={20} className="buy-cell__arrow" />
           </a>
         </div>

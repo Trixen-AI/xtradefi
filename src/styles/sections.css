@@ -1257,9 +1257,9 @@ section {
   height: 30px;
   width: 118px;
 }
-.buy-cell__logo--feather {
-  height: 36px;
-  width: 28px;
+.buy-cell__logo--ethereum {
+  height: 46px;
+  width: 30px;
 }
 .buy-cell__tag {
   padding: 4px 6px;
@@ -1581,9 +1581,9 @@ section {
   width: 140px;
   height: 36px;
 }
-.partner-logo--robinhood {
-  width: 30px;
-  height: 40px;
+.partner-logo--ethereum {
+  width: 44px;
+  height: 64px;
 }
 .partner-logo--usdg {
   width: 120px;

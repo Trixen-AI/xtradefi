@@ -54,7 +54,7 @@ export function Header() {
   return (
     <header ref={root} className={`site-header ${mobile ? 'is-mobile-open' : ''}`}>
       <div className="header-container">
-        <a className="header-logo" href="#intro" aria-label="xTradeFi home">
+        <a className="header-logo" href="#intro" aria-label="QuiverFi home">
           <Logo className="header-logo__svg" />
         </a>
         <div className="header-mdl-part">

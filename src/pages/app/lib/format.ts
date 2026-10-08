@@ -5,6 +5,7 @@ const usdCompact = new Intl.NumberFormat('en-US', { style: 'currency', currency:
 
 export function fmtUsd(n: number | undefined, compact = false) {
   if (n === undefined || !Number.isFinite(n)) return '–'
+  if (n !== 0 && Math.abs(n) < 0.01) return n > 0 ? '<$0.01' : '>-$0.01'
   if (compact && Math.abs(n) >= 100_000) return usdCompact.format(n)
   return usd2.format(n)
 }

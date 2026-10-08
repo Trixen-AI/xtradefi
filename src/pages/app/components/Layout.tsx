@@ -2,7 +2,7 @@ import { NavLink, Outlet } from 'react-router'
 import { useBlockNumber } from 'wagmi'
 import { Logo } from '@/components/brand/Logo'
 import { LINKS } from '@/data/site'
-import { robinhoodChain } from '../wallet/chain'
+import { ethereumChain } from '../wallet/chain'
 import { hasProjectId } from '../wallet/appkit'
 import { AccountButton, SwitchChainButton } from './wallet'
 import { useWallet } from '../hooks/useWallet'
@@ -25,11 +25,11 @@ function NavIcon({ d }: { d: string }) {
 }
 
 function NetworkChip() {
-  const block = useBlockNumber({ chainId: robinhoodChain.id, query: { refetchInterval: 12_000 } })
+  const block = useBlockNumber({ chainId: ethereumChain.id, query: { refetchInterval: 12_000 } })
   return (
-    <span className="dnet" title="Latest Robinhood Chain block, read from the network RPC">
+    <span className="dnet" title="Latest Ethereum block, read from the network RPC">
       <i className={block.data ? 'is-live' : ''} aria-hidden="true" />
-      <span className="dnet__name">{robinhoodChain.name}</span>
+      <span className="dnet__name">{ethereumChain.name}</span>
       <span className="dnet__block">{block.data ? `#${block.data.toLocaleString('en-US')}` : 'connecting…'}</span>
     </span>
   )
@@ -40,7 +40,7 @@ export function DashLayout() {
   return (
     <div className="dash">
       <header className="dash-top">
-        <a className="dash-top__logo" href="/" aria-label="xTradeFi website">
+        <a className="dash-top__logo" href="/" aria-label="QuiverFi website">
           <Logo className="dash-top__logo-svg" />
         </a>
         <div className="dash-top__mid">
@@ -80,7 +80,7 @@ export function DashLayout() {
         ) : null}
         {wrongChain ? (
           <Notice tone="warn" title={`Your wallet is on another network.`} action={<SwitchChainButton />}>
-            xTradeFi runs on {robinhoodChain.name} (chain ID {robinhoodChain.id}).
+            QuiverFi runs on {ethereumChain.name} (chain ID {ethereumChain.id}).
           </Notice>
         ) : null}
         <Outlet />

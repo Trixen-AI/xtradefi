@@ -7,8 +7,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.xtradefi.org" }],
-      "destination": "https://xtradefi.org/:path*",
+      "has": [{ "type": "host", "value": "www.quiverfi.org" }],
+      "destination": "https://quiverfi.org/:path*",
       "permanent": true
     }
   ],

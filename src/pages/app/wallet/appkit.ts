@@ -2,13 +2,13 @@ import { createAppKit } from '@reown/appkit/react'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import type { AppKitNetwork } from '@reown/appkit/networks'
 import { QueryClient } from '@tanstack/react-query'
-import { robinhoodChain } from './chain'
+import { ethereumChain } from './chain'
 
 /** Reown project ID from the environment. Without it the dashboard still reads chain data but cannot connect. */
 export const projectId = import.meta.env.VITE_REOWN_PROJECT_ID?.trim() ?? ''
 export const hasProjectId = projectId.length > 0
 
-export const networks: [AppKitNetwork, ...AppKitNetwork[]] = [robinhoodChain]
+export const networks: [AppKitNetwork, ...AppKitNetwork[]] = [ethereumChain]
 
 // ssr: true makes wagmi reconnect the stored wallet in an effect instead of during render, which otherwise
 // triggers React's "cannot update a component while rendering a different component" warning.
@@ -25,10 +25,10 @@ if (hasProjectId) {
   createAppKit({
     adapters: [wagmiAdapter],
     networks,
-    defaultNetwork: robinhoodChain,
+    defaultNetwork: ethereumChain,
     projectId,
     metadata: {
-      name: 'xTradeFi',
+      name: 'QuiverFi',
       description: 'On-chain options on tokenized stocks',
       url: window.location.origin,
       icons: [`${window.location.origin}/brand/logo-500.png`],
@@ -44,6 +44,5 @@ if (hasProjectId) {
     },
     features: { email: false, socials: false, swaps: false, onramp: false, send: false, history: false, analytics: false },
     defaultAccountTypes: { eip155: 'eoa' },
-    chainImages: { [robinhoodChain.id]: '/favicon.svg' },
   })
 }

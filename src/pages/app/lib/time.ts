@@ -36,7 +36,7 @@ export function isMarketSession(at = new Date()) {
   return true
 }
 
-/** Upcoming Friday 16:00 New York expiries (skips one that is less than a day away). */
+/** Upcoming Friday 16:00 New York expiries (skips one that is less than two days away). */
 export function upcomingExpiries(count = 4, at = new Date()) {
   const out: Date[] = []
   const p = nyParts(at)
@@ -45,7 +45,7 @@ export function upcomingExpiries(count = 4, at = new Date()) {
     const d = new Date(base.getTime() + i * 86_400_000)
     if (d.getUTCDay() !== 5) continue
     const exp = fromNy(d.getUTCFullYear(), d.getUTCMonth() + 1, d.getUTCDate(), 16)
-    if (exp.getTime() - at.getTime() > 86_400_000) out.push(exp)
+    if (exp.getTime() - at.getTime() > 2 * 86_400_000) out.push(exp)
   }
   return out
 }

@@ -5,8 +5,8 @@ import { Marquee } from '@/components/ui/Marquee'
 import { Reveal } from '@/components/ui/Reveal'
 import { BrandLogo, type BrandKey } from '@/components/brand/BrandLogo'
 
-const AVATAR: Record<string, BrandKey> = { chainlink: 'chainlink-symbol', robinhood: 'robinhood', usdg: 'usdg-token' }
-const FACTS = ['No KYC', '0.5% protocol fee', '24/5 markets', '30s price updates', 'Chainlink settled', 'Robinhood Chain', 'One USDG balance', 'Custom strikes']
+const AVATAR: Record<string, BrandKey> = { chainlink: 'chainlink-symbol', ethereum: 'ethereum', usdg: 'usdg-token' }
+const FACTS = ['No KYC', '0.5% protocol fee', '24/5 markets', '30s price updates', 'Chainlink settled', 'Ethereum mainnet', 'One USDG balance', 'Custom strikes']
 
 /** Generic wallet glyph for the "any EVM wallet" card (no brand implied). */
 function WalletIcon() {
@@ -24,7 +24,7 @@ export function Cta() {
   const cells = [
     { pre: x.pre, title: x.label, href: x.href, pill: x.handle, right: false, handle: true },
     { pre: 'Read the', title: 'Docs', href: LINKS.docs, pill: 'Protocol docs', right: true },
-    { pre: 'Browse the', title: 'Markets', href: '#markets', pill: '16 stocks', right: false },
+    { pre: 'Browse the', title: 'Markets', href: '#markets', pill: '5 markets', right: false },
     { pre: 'Ready to trade?', title: 'Launch App', href: LINKS.app, pill: 'Open app', right: true },
   ]
   return (

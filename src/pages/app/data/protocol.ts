@@ -1,9 +1,9 @@
 import type { Address } from 'viem'
-import { robinhoodChain } from '../wallet/chain'
+import { ethereumChain } from '../wallet/chain'
 
 // How the dashboard executes actions.
 //
-// Until the xTradeFi contracts are deployed, every action is a real EIP-712 signature from the connected wallet
+// Until the QuiverFi contracts are deployed, every action is a real EIP-712 signature from the connected wallet
 // (the same pattern as Permit2 approvals and signed intents): no gas, and no token leaves the wallet. Signed
 // approvals and orders are kept per wallet in this browser (lib/ledger.ts), positions are valued on live Chainlink
 // prices and settle at the oracle price at expiry.
@@ -19,9 +19,9 @@ export const PROTOCOL = {
 }
 
 export const EIP712_DOMAIN = {
-  name: 'xTradeFi',
+  name: 'QuiverFi',
   version: '1',
-  chainId: robinhoodChain.id,
+  chainId: ethereumChain.id,
 } as const
 
 export const EIP712_TYPES = {

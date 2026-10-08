@@ -104,7 +104,7 @@ export default function Vault() {
       </header>
 
       <div className="dstats">
-        <Stat label="Your USDG" value={isConnected ? fmtNum(walletFree, 2) : '–'} sub={usdgPrice ? `Free to use · oracle ${fmtUsd(usdgPrice)}` : 'Global Dollar on Robinhood Chain'} />
+        <Stat label="Your USDG" value={isConnected ? fmtNum(walletFree, 2) : '–'} sub={usdgPrice ? `Free to use · oracle ${fmtUsd(usdgPrice)}` : 'Global Dollar on Ethereum'} />
         <Stat label="In the vault" value={isConnected ? fmtUsd(inVault * (usdgPrice ?? 1)) : '–'} sub={`${fmtNum(inVault, 2)} USDG deposited`} />
         <Stat label="Strategy" value="Covered calls" sub="Premium is reinvested each cycle" />
         <Stat label="Protocol fee" value={fmtPct(PROTOCOL.feeRate, 1)} sub="Per trade" />

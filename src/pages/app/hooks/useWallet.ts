@@ -1,5 +1,5 @@
 import { useAccount } from 'wagmi'
-import { robinhoodChain } from '../wallet/chain'
+import { ethereumChain } from '../wallet/chain'
 
 /** Account state from wagmi (works with or without AppKit initialised). */
 export function useWallet() {
@@ -7,8 +7,8 @@ export function useWallet() {
   return {
     address,
     isConnected,
-    onChain: isConnected && chainId === robinhoodChain.id,
-    wrongChain: isConnected && chainId !== robinhoodChain.id,
+    onChain: isConnected && chainId === ethereumChain.id,
+    wrongChain: isConnected && chainId !== ethereumChain.id,
     busy: status === 'connecting' || status === 'reconnecting',
   }
 }

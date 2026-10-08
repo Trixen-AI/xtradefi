@@ -1,6 +1,6 @@
 {
-  "name": "xTradeFi",
-  "short_name": "xTradeFi",
+  "name": "QuiverFi",
+  "short_name": "QuiverFi",
   "description": "On-chain options on tokenized stocks.",
   "start_url": "/",
   "scope": "/",

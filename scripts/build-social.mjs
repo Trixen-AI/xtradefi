@@ -81,8 +81,8 @@ const W = 1200
 const H = 630
 const headline = outline(sans, 'On-chain options on tokenized stocks.', 50, -0.4)
 const products = outline(mono, 'COVERED CALLS  ·  PUTS  ·  BINARIES  ·  YIELD VAULT', 19, 1.2)
-const domain = outline(mono, 'xtradefi.org', 24, 0.5)
-const chain = outline(mono, 'ROBINHOOD CHAIN  ·  CHAINLINK SETTLED', 17, 1)
+const domain = outline(mono, 'quiverfi.org', 24, 0.5)
+const chain = outline(mono, 'ETHEREUM  ·  CHAINLINK SETTLED', 17, 1)
 
 const lockScale = 2.2 // lockup is 48 high → 105.6 px
 const og = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" fill="none">

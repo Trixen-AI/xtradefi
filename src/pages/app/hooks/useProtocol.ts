@@ -120,6 +120,6 @@ export function useProtocol() {
 export function actionError(e: unknown) {
   const msg = e instanceof Error ? e.message : String(e)
   if (/reject|denied|cancel/i.test(msg)) return 'Signature rejected in your wallet.'
-  if (/chain|network/i.test(msg)) return 'Switch your wallet to Robinhood Chain and try again.'
+  if (/chain|network/i.test(msg)) return 'Switch your wallet to Ethereum mainnet and try again.'
   return 'The wallet could not sign this request. Try again.'
 }

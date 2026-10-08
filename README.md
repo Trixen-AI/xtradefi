@@ -1,12 +1,12 @@
-# xTradeFi
+# QuiverFi
 
-On-chain options on tokenized stocks: covered calls, cash-secured puts, binary options and a covered-call yield vault on Robinhood Chain, settled at the Chainlink oracle price.
+On-chain options on tokenized stocks: covered calls, cash-secured puts, binary options and a covered-call yield vault on Ethereum, settled at the Chainlink oracle price.
 
 - Website: `/` (landing page)
 - Docs: `/docs`
 - App: `/app` (wallet dashboard, Reown AppKit + wagmi)
 
-Production domain: **https://xtradefi.org**
+Production domain: **https://quiverfi.org**
 
 ## Stack
 
@@ -38,7 +38,7 @@ Other scripts:
 | Variable | Required | Value |
 |---|---|---|
 | `VITE_REOWN_PROJECT_ID` | Yes | Project ID from https://dashboard.reown.com. Without it the app still shows live market data, but wallets cannot connect. |
-| `VITE_RPC_URL` | No | A dedicated Robinhood Chain RPC (Alchemy, QuickNode, dRPC…). Defaults to the public `https://rpc.mainnet.chain.robinhood.com`, which is rate-limited. Recommended for production traffic. |
+| `VITE_RPC_URL` | No | A dedicated Ethereum mainnet RPC (Alchemy, Infura, QuickNode, dRPC…). Defaults to the public `https://ethereum-rpc.publicnode.com`, which is rate-limited. Recommended for production traffic. |
 
 None of these are secrets in the usual sense (they ship to the browser), but keep `.env` out of git anyway.
 
@@ -46,9 +46,9 @@ None of these are secrets in the usual sense (they ship to the browser), but kee
 
 1. Import the GitHub repository in Vercel. `vercel.json` sets the framework (Vite), install/build commands and the `dist` output.
 2. **Settings → Environment Variables**: add `VITE_REOWN_PROJECT_ID` (and optionally `VITE_RPC_URL`) for **Production** and **Preview**.
-3. **Settings → Domains**: add `xtradefi.org` and `www.xtradefi.org`. `vercel.json` already redirects `www` to the apex domain.
+3. **Settings → Domains**: add `quiverfi.org` and `www.quiverfi.org`. `vercel.json` already redirects `www` to the apex domain.
 4. **Reown dashboard** (dashboard.reown.com → your project):
-   - Add `https://xtradefi.org` and `https://www.xtradefi.org` to the allowed domains (and your `*.vercel.app` preview domain if you test previews).
+   - Add `https://quiverfi.org` and `https://www.quiverfi.org` to the allowed domains (and your `*.vercel.app` preview domain if you test previews).
    - Turn off Email / Social login, Swaps and On-ramp. The dashboard settings override the app's local config.
 5. Deploy. Routes like `/docs/fees` and `/app/trade` are served by the SPA fallback in `vercel.json`.
 
@@ -71,9 +71,9 @@ src/
   pages/docs/      documentation
   pages/app/       dashboard (wallet, data hooks, views)
   data/site.ts     landing copy and market list
-  config/network.ts Robinhood Chain parameters
+  config/network.ts Ethereum network parameters
 scripts/           logo, social images, sitemap
 public/            static assets, brand exports, robots, manifest
 ```
 
-Names and logos of third-party projects (Chainlink, Robinhood Chain, USDG) identify the services xTradeFi uses; xTradeFi is not affiliated with them.
+Names and logos of third-party projects (Chainlink, Ethereum, Ondo Global Markets, USDG) identify the services QuiverFi uses; QuiverFi is not affiliated with them.

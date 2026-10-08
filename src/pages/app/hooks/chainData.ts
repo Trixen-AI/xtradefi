@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
 import { formatUnits, type Address } from 'viem'
 import { useBalance, useReadContract, useReadContracts } from 'wagmi'
-import { robinhoodChain } from '../wallet/chain'
-import { aggregatorAbi, erc20Abi, ETH_FEED, FEED_DECIMALS, FEED_HEARTBEAT_S, MARKET_LIST, stockTokenAbi, USDG, USDG_FEED } from '../data/tokens'
+import { ethereumChain } from '../wallet/chain'
+import { aggregatorAbi, erc20Abi, ETH_FEED, FEED_DECIMALS, FEED_HEARTBEAT_S, MARKET_LIST, ONDO_SVALUE_ORACLE, sValueAbi, USDG, USDG_FEED } from '../data/tokens'
 import { isMarketSession } from '../lib/time'
 import type { Round } from '../lib/options'
 
-const chainId = robinhoodChain.id
+const chainId = ethereumChain.id
 
 // ---------- clock ----------
 
@@ -66,7 +66,7 @@ const BALANCE_TOKENS: { key: string; address: Address; decimals: number }[] = [
   ...MARKET_LIST.map((m) => ({ key: m.ticker, address: m.token, decimals: m.decimals })),
 ]
 
-/** ETH, USDG and every stock-token balance of an address on Robinhood Chain. */
+/** ETH, USDG and every stock-token balance of an address on Ethereum. */
 export function useWalletBalances(address?: Address) {
   const enabled = !!address
   const eth = useBalance({ address, chainId, query: { enabled, refetchInterval: 15_000 } })
@@ -130,8 +130,31 @@ export function useRounds(feed: Address | undefined, count = 40) {
   return { rounds, isLoading: latest.isLoading || hist.isLoading, isError: latest.isError }
 }
 
-/** ERC-8056 display multiplier of a stock token (1e18 = 1x). */
-export function useUiMultiplier(token?: Address) {
-  const q = useReadContract({ address: token, abi: stockTokenAbi, functionName: 'uiMultiplier', chainId, query: { enabled: !!token, staleTime: 10 * 60_000 } })
-  return q.data !== undefined ? Number(formatUnits(q.data, 18)) : undefined
+/** Ondo shares-per-token (sValue, 1e18 = 1.0) from the SyntheticSharesOracle. The oracle reverts for tokens with no
+ *  corporate action recorded; that means 1 token = 1 share, so the hook returns 1. */
+export function useSValue(token?: Address) {
+  const q = useReadContract({ address: ONDO_SVALUE_ORACLE, abi: sValueAbi, functionName: 'getSValue', args: token ? [token] : undefined, chainId, query: { enabled: !!token, staleTime: 10 * 60_000, retry: false } })
+  if (!token) return undefined
+  if (q.data) return Number(formatUnits(q.data[0], 18))
+  return q.isError ? 1 : undefined
+}
+
+/** sValue for every tradable token in one multicall (a reverted call means 1 token = 1 share). Token value =
+ *  balance × share price × sValue. */
+export function useSValues() {
+  const tokens = MARKET_LIST.filter((m) => m.tradable)
+  const q = useReadContracts({
+    contracts: tokens.map((m) => ({ address: ONDO_SVALUE_ORACLE, abi: sValueAbi, functionName: 'getSValue' as const, args: [m.token] as const, chainId })),
+    query: { staleTime: 10 * 60_000 },
+  })
+  return useMemo(() => {
+    const map = new Map<string, number>()
+    tokens.forEach((m, i) => {
+      const r = q.data?.[i]
+      map.set(m.ticker, r && r.status === 'success' ? Number(formatUnits((r.result as readonly [bigint, boolean])[0], 18)) : 1)
+    })
+    return map
+    // tokens is derived from a static list
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q.data])
 }

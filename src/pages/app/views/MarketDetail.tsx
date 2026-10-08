@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router'
 import { FEED_DEVIATION, FEED_HEARTBEAT_S, MARKET_BY_TICKER } from '../data/tokens'
-import { feedState, useNow, useOracles, useRounds, useUiMultiplier, useWalletBalances } from '../hooks/chainData'
+import { feedState, useNow, useOracles, useRounds, useSValue, useWalletBalances } from '../hooks/chainData'
 import { realisedVol } from '../lib/options'
 import { ago, fmtNum, fmtPct, fmtUsd, shortAddr } from '../lib/format'
 import { explorer } from '../wallet/chain'
@@ -17,7 +17,7 @@ export default function MarketDetail() {
   const { quotes } = useOracles()
   const { balances } = useWalletBalances(address)
   const { rounds, isLoading: histLoading } = useRounds(market?.feed, 40)
-  const multiplier = useUiMultiplier(market?.token)
+  const multiplier = useSValue(market?.token)
 
   if (!market) return <Navigate to="/app/markets" replace />
   const quote = quotes.get(market.ticker)
@@ -63,7 +63,7 @@ export default function MarketDetail() {
           </a>
         </div>
       ) : (
-        <p className="dnote">{market.ticker} has a stock token on Robinhood Chain but no Chainlink price feed yet, so options on it are not available.</p>
+        <p className="dnote">{market.ticker} has a stock token on Ethereum but no Chainlink price feed yet, so options on it are not available.</p>
       )}
 
       {market.tradable ? (
@@ -76,7 +76,7 @@ export default function MarketDetail() {
       <div className="dgrid dgrid--3">
         <Stat label="Realised volatility" value={vol !== undefined ? fmtPct(vol) : '–'} sub={vol !== undefined ? `Annualised, from ${rounds.length} oracle rounds` : 'Needs at least 9 oracle rounds'} />
         <Stat label="Your balance" value={isConnected ? fmtNum(bal) : '–'} sub={isConnected ? (quote ? fmtUsd(bal * quote.price) : 'Not priced') : 'Connect a wallet'} />
-        <Stat label="Display multiplier" value={multiplier !== undefined ? `${fmtNum(multiplier, 6)}x` : '–'} sub="ERC-8056 uiMultiplier; the feed price already includes it" />
+        <Stat label="Shares per token" value={multiplier !== undefined ? `${fmtNum(multiplier, 6)}` : '–'} sub="Ondo sValue: splits and dividends adjust it, the token never rebases" />
       </div>
 
       <Panel title="Contracts">

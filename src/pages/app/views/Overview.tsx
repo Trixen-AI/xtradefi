@@ -3,7 +3,7 @@ import { MARKET_LIST, USDG } from '../data/tokens'
 import { lockedBySymbol, useLedger, vaultBalance } from '../lib/ledger'
 import { PRODUCT_LABEL } from '../lib/positions'
 import { fmtExpiry } from '../lib/time'
-import { feedState, useNow, useOracles, useWalletBalances } from '../hooks/chainData'
+import { feedState, useNow, useOracles, useSValues, useWalletBalances } from '../hooks/chainData'
 import { ago, fmtNum, fmtUsd, shortAddr } from '../lib/format'
 import { explorer } from '../wallet/chain'
 import { ConnectCta } from '../components/wallet'
@@ -17,6 +17,7 @@ export default function Overview() {
   const { quotes, isLoading: pricesLoading } = useOracles()
   const { eth, balances, isLoading } = useWalletBalances(address)
   const book = useLedger(address)
+  const sValues = useSValues()
   const locked = lockedBySymbol(book)
   const openPositions = book.positions.filter((p) => p.status === 'open')
 
@@ -29,9 +30,9 @@ export default function Overview() {
       MARKET_LIST.map((m) => {
         const bal = balances.get(m.ticker)?.amount ?? 0
         const price = quotes.get(m.ticker)?.price
-        return { m, bal, price, value: price !== undefined ? bal * price : undefined }
+        return { m, bal, price, value: price !== undefined ? bal * price * (sValues.get(m.ticker) ?? 1) : undefined }
       }).filter((h) => h.bal > 0),
-    [balances, quotes],
+    [balances, quotes, sValues],
   )
   const usdg = balances.get('USDG')?.amount ?? 0
   const freeUsdg = Math.max(0, usdg - (locked.get('USDG') ?? 0))
@@ -46,7 +47,7 @@ export default function Overview() {
       <header className="dview__head">
         <div>
           <p className="dview__pre">Overview</p>
-          <h1 className="dview__title">{isConnected ? 'Your account' : 'Welcome to xTradeFi'}</h1>
+          <h1 className="dview__title">{isConnected ? 'Your account' : 'Welcome to QuiverFi'}</h1>
         </div>
         {isConnected && address ? (
           <div className="dview__addr">
@@ -62,7 +63,7 @@ export default function Overview() {
           <div className="dhero__inner">
             <div>
               <h2 className="dhero__title">Connect an EVM wallet</h2>
-              <p className="dhero__text">See your USDG and stock-token balances on Robinhood Chain, what you can use as collateral, and build option positions on live Chainlink prices. No sign-up, no email, no KYC.</p>
+              <p className="dhero__text">See your USDG and stock-token balances on Ethereum, what you can use as collateral, and build option positions on live Chainlink prices. No sign-up, no email, no KYC.</p>
             </div>
             <ConnectCta />
           </div>
@@ -72,7 +73,7 @@ export default function Overview() {
           <Stat label="Portfolio value" value={isLoading ? <Skel w={120} /> : fmtUsd(portfolio)} sub={unpriced ? `${unpriced} holding${unpriced > 1 ? 's' : ''} without an oracle price not included` : 'USDG, stock tokens and ETH at oracle prices'} />
           <Stat label="USDG" value={isLoading ? <Skel /> : fmtNum(usdg, 2)} sub={locked.get('USDG') ? `${fmtNum(freeUsdg, 2)} free · ${fmtNum(locked.get('USDG'), 2)} in positions and the vault` : 'Collateral for puts, binaries and the vault'} />
           <Stat label="Stock tokens" value={isLoading ? <Skel /> : fmtUsd(stockValue)} sub={`${holdings.length} market${holdings.length === 1 ? '' : 's'} held`} />
-          <Stat label="ETH (gas)" value={isLoading || !eth ? <Skel /> : fmtNum(eth.amount, 5)} sub={eth && ethPrice ? fmtUsd(eth.amount * ethPrice) : 'Network fees on Robinhood Chain'} />
+          <Stat label="ETH (gas)" value={isLoading || !eth ? <Skel /> : fmtNum(eth.amount, 5)} sub={eth && ethPrice ? fmtUsd(eth.amount * ethPrice) : 'Network fees on Ethereum'} />
         </div>
       )}
 
@@ -204,7 +205,7 @@ export default function Overview() {
             </div>
           ) : (
             <Empty title="No USDG or stock tokens in this wallet" action={<a className="dbtn dbtn--sm" href="/docs/getting-started">How to get started</a>}>
-              Fund this address on Robinhood Chain with USDG for puts, binaries and the vault, or with stock tokens for covered calls.
+              Fund this address on Ethereum with USDG for puts, binaries and the vault, or with stock tokens for covered calls.
             </Empty>
           )}
         </Panel>
