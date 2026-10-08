@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { USDG } from '../data/tokens'
+import { USDC } from '../data/tokens'
 import { PROTOCOL } from '../data/protocol'
 import { useOracles, useWalletBalances } from '../hooks/chainData'
 import { useWallet } from '../hooks/useWallet'
@@ -13,13 +13,13 @@ import { Empty, Panel, Stat } from '../components/ui'
 import { AddTokenButton } from '../components/AddToken'
 
 const STEPS = [
-  ['Deposit USDG', 'Your deposit joins the vault pool and is represented by a vault share.'],
-  ['The vault writes covered calls', 'Each cycle the vault sells covered calls and collects USDG premium.'],
+  ['Deposit USDC', 'Your deposit joins the vault pool and is represented by a vault share.'],
+  ['The vault writes covered calls', 'Each cycle the vault sells covered calls and collects USDC premium.'],
   ['Premium compounds', 'Premium goes back into the pool, so your share grows without you managing positions.'],
   ['Withdraw', 'Redeem your share for your part of the pool at that time.'],
 ]
 
-const USDG_REF = { symbol: USDG.symbol, address: USDG.address, decimals: USDG.decimals }
+const USDC_REF = { symbol: USDC.symbol, address: USDC.address, decimals: USDC.decimals }
 
 export default function Vault() {
   const { address, isConnected, wrongChain } = useWallet()
@@ -33,13 +33,13 @@ export default function Vault() {
   const [msg, setMsg] = useState<{ tone: 'ok' | 'err'; text: string } | null>(null)
 
   const inVault = vaultBalance(book)
-  const locked = lockedBySymbol(book).get('USDG') ?? 0
-  const walletFree = Math.max(0, (balances.get('USDG')?.amount ?? 0) - locked)
-  const usdgPrice = quotes.get('USDG')?.price
+  const locked = lockedBySymbol(book).get('USDC') ?? 0
+  const walletFree = Math.max(0, (balances.get('USDC')?.amount ?? 0) - locked)
+  const usdcPrice = quotes.get('USDC')?.price
   const available = mode === 'deposit' ? walletFree : inVault
   const amount = Number(input) || 0
   const enough = amount <= available + 1e-9
-  const allowance = book.approvals.USDG?.amount ?? 0
+  const allowance = book.approvals.USDC?.amount ?? 0
   const needsApproval = mode === 'deposit' && allowance + 1e-9 < amount
 
   const run = async (kind: 'approve' | 'submit') => {
@@ -47,12 +47,12 @@ export default function Vault() {
     setBusy(kind)
     try {
       if (kind === 'approve') {
-        await protocol.approve(USDG_REF, amount)
-        setMsg({ tone: 'ok', text: 'USDG approved. Now confirm the deposit.' })
+        await protocol.approve(USDC_REF, amount)
+        setMsg({ tone: 'ok', text: 'USDC approved. Now confirm the deposit.' })
       } else {
-        await protocol.vault(mode, amount, USDG_REF)
+        await protocol.vault(mode, amount, USDC_REF)
         setInput('')
-        setMsg({ tone: 'ok', text: mode === 'deposit' ? `Deposited ${fmtNum(amount, 2)} USDG.` : `Withdrew ${fmtNum(amount, 2)} USDG.` })
+        setMsg({ tone: 'ok', text: mode === 'deposit' ? `Deposited ${fmtNum(amount, 2)} USDC.` : `Withdrew ${fmtNum(amount, 2)} USDC.` })
       }
     } catch (e) {
       setMsg({ tone: 'err', text: actionError(e) })
@@ -67,13 +67,13 @@ export default function Vault() {
     if (wrongChain) return <SwitchChainButton className="dbtn--block" />
     if (mode === 'withdraw' && inVault <= 0) return <button className="dbtn dbtn--block" disabled type="button">Nothing to withdraw</button>
     if (amount <= 0) return <button className="dbtn dbtn--block" disabled type="button">Enter an amount</button>
-    if (!enough) return <button className="dbtn dbtn--block" disabled type="button">{mode === 'deposit' ? 'Not enough USDG' : 'More than your vault balance'}</button>
+    if (!enough) return <button className="dbtn dbtn--block" disabled type="button">{mode === 'deposit' ? 'Not enough USDC' : 'More than your vault balance'}</button>
     return (
       <div className="dflow">
         {mode === 'deposit' ? (
           <ol className="dflow__steps" aria-label="Steps">
             <li className={needsApproval ? 'is-current' : 'is-done'}>
-              <span>{needsApproval ? '1' : '✓'}</span> Approve USDG
+              <span>{needsApproval ? '1' : '✓'}</span> Approve USDC
             </li>
             <li className={needsApproval ? '' : 'is-current'}>
               <span>2</span> Deposit
@@ -82,11 +82,11 @@ export default function Vault() {
         ) : null}
         {needsApproval ? (
           <button type="button" className="dbtn dbtn--primary dbtn--block" disabled={busy !== null} onClick={() => run('approve')}>
-            {busy === 'approve' ? 'Confirm in your wallet…' : `Approve ${fmtNum(amount, 2)} USDG`}
+            {busy === 'approve' ? 'Confirm in your wallet…' : `Approve ${fmtNum(amount, 2)} USDC`}
           </button>
         ) : (
           <button type="button" className="dbtn dbtn--primary dbtn--block" disabled={busy !== null} onClick={() => run('submit')}>
-            {busy === 'submit' ? 'Confirm in your wallet…' : mode === 'deposit' ? `Deposit ${fmtNum(amount, 2)} USDG` : `Withdraw ${fmtNum(amount, 2)} USDG`}
+            {busy === 'submit' ? 'Confirm in your wallet…' : mode === 'deposit' ? `Deposit ${fmtNum(amount, 2)} USDC` : `Withdraw ${fmtNum(amount, 2)} USDC`}
           </button>
         )}
       </div>
@@ -99,13 +99,13 @@ export default function Vault() {
         <div>
           <p className="dview__pre">Vault</p>
           <h1 className="dview__title">Yield vault</h1>
-          <p className="dview__sub">Deposit USDG and let the vault write covered calls on your behalf. Compounding yield, no active management.</p>
+          <p className="dview__sub">Deposit USDC and let the vault write covered calls on your behalf. Compounding yield, no active management.</p>
         </div>
       </header>
 
       <div className="dstats">
-        <Stat label="Your USDG" value={isConnected ? fmtNum(walletFree, 2) : '–'} sub={usdgPrice ? `Free to use · oracle ${fmtUsd(usdgPrice)}` : 'Global Dollar on Ethereum'} />
-        <Stat label="In the vault" value={isConnected ? fmtUsd(inVault * (usdgPrice ?? 1)) : '–'} sub={`${fmtNum(inVault, 2)} USDG deposited`} />
+        <Stat label="Your USDC" value={isConnected ? fmtNum(walletFree, 2) : '–'} sub={usdcPrice ? `Free to use · oracle ${fmtUsd(usdcPrice)}` : 'USD Coin on Ethereum'} />
+        <Stat label="In the vault" value={isConnected ? fmtUsd(inVault * (usdcPrice ?? 1)) : '–'} sub={`${fmtNum(inVault, 2)} USDC deposited`} />
         <Stat label="Strategy" value="Covered calls" sub="Premium is reinvested each cycle" />
         <Stat label="Protocol fee" value={fmtPct(PROTOCOL.feeRate, 1)} sub="Per trade" />
       </div>
@@ -131,14 +131,14 @@ export default function Vault() {
             ))}
           </div>
           <div className="dfield">
-            <label htmlFor="v-amount">Amount (USDG)</label>
+            <label htmlFor="v-amount">Amount (USDC)</label>
             <div className="dinput-wrap">
               <input id="v-amount" className="dinput" inputMode="decimal" placeholder="0.00" value={input} onChange={(e) => setInput(e.target.value)} />
               <button type="button" className="dinput-max" disabled={!isConnected || available <= 0} onClick={() => setInput(String(Math.floor(available * 100) / 100))}>
                 Max
               </button>
             </div>
-            <div className="dfield__meta">{isConnected ? `Available: ${fmtNum(available, 2)} ${mode === 'deposit' ? 'USDG' : 'USDG in the vault'}` : 'Connect a wallet to see your balance'}</div>
+            <div className="dfield__meta">{isConnected ? `Available: ${fmtNum(available, 2)} ${mode === 'deposit' ? 'USDC' : 'USDC in the vault'}` : 'Connect a wallet to see your balance'}</div>
           </div>
           {action}
           {msg ? (
@@ -148,7 +148,7 @@ export default function Vault() {
           ) : null}
           {isConnected ? (
             <div className="dfield__row dfield__row--end">
-              <AddTokenButton address={USDG.address} symbol="USDG" decimals={USDG.decimals} />
+              <AddTokenButton address={USDC.address} symbol="USDC" decimals={USDC.decimals} />
             </div>
           ) : null}
         </Panel>
@@ -162,7 +162,7 @@ export default function Vault() {
                     <span className={`dact__kind is-${v.action}`}>{v.action === 'deposit' ? 'Deposit' : 'Withdraw'}</span>
                     <span className="dact__amt">
                       {v.action === 'deposit' ? '+' : '−'}
-                      {fmtNum(v.amount, 2)} USDG
+                      {fmtNum(v.amount, 2)} USDC
                     </span>
                     <span className="dact__meta">
                       {fmtNyTime(new Date(v.at * 1000))} · {shortAddr(v.signature)}

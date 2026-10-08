@@ -43,10 +43,10 @@ export const DOC_GROUPS: DocGroup[] = [
             body: (
               <KeyValues
                 rows={[
-                  ['Covered calls', 'Lock stock tokens, sell calls, earn USDG premium upfront.'],
-                  ['Cash-secured puts', 'Lock USDG, sell puts, earn premium and agree to buy at your strike.'],
+                  ['Covered calls', 'Lock stock tokens, sell calls, earn USDC premium upfront.'],
+                  ['Cash-secured puts', 'Lock USDC, sell puts, earn premium and agree to buy at your strike.'],
                   ['Binary options', 'Pick up or down. Right at expiry: collect close to 2x your stake.'],
-                  ['Yield vault', 'Deposit USDG; the vault writes covered calls for you and compounds.'],
+                  ['Yield vault', 'Deposit USDC; the vault writes covered calls for you and compounds.'],
                 ]}
               />
             ),
@@ -59,7 +59,7 @@ export const DOC_GROUPS: DocGroup[] = [
                 <li>Your wallet is the account. No sign-up, no email, no KYC.</li>
                 <li>Fully collateralized positions. You can never owe more than you locked.</li>
                 <li>Oracle settlement. Nobody chooses the expiry price; Chainlink delivers it on-chain.</li>
-                <li>One balance. A single USDG balance covers margin across every market.</li>
+                <li>One balance. A single USDC balance covers margin across every market.</li>
               </ul>
             ),
           },
@@ -68,7 +68,7 @@ export const DOC_GROUPS: DocGroup[] = [
       {
         slug: 'getting-started',
         title: 'Getting started',
-        lead: 'Everything you need before your first position: an EVM wallet on Ethereum and some USDG.',
+        lead: 'Everything you need before your first position: an EVM wallet on Ethereum and some USDC.',
         sections: [
           {
             id: 'connect',
@@ -95,7 +95,7 @@ export const DOC_GROUPS: DocGroup[] = [
             body: (
               <Steps
                 items={[
-                  ['Fund your wallet', 'Hold USDG for puts, binaries and the vault, or stock tokens for covered calls.'],
+                  ['Fund your wallet', 'Hold USDC for puts, binaries and the vault, or stock tokens for covered calls.'],
                   ['Pick a product and market', 'Covered call, put, binary or vault; then a stock, a strike and an expiry.'],
                   ['Review and sign', 'The app shows collateral, premium and the 0.5% protocol fee before you sign.'],
                   ['Wait for expiry', 'The position settles automatically at the Chainlink price. Nothing to claim by hand.'],
@@ -120,7 +120,7 @@ export const DOC_GROUPS: DocGroup[] = [
             title: 'How it works',
             body: (
               <>
-                <p>You lock stock tokens as collateral and sell a call at a strike and expiry you choose. The buyer pays you a premium in USDG straight away.</p>
+                <p>You lock stock tokens as collateral and sell a call at a strike and expiry you choose. The buyer pays you a premium in USDC straight away.</p>
                 <p>At expiry the contract reads the oracle price:</p>
                 <ul className="docs-list">
                   <li>At or below the strike: the call expires worthless. Your stock tokens unlock and the premium is yours.</li>
@@ -141,7 +141,7 @@ export const DOC_GROUPS: DocGroup[] = [
               <KeyValues
                 rows={[
                   ['Collateral', 'Stock tokens of the same market'],
-                  ['You receive', 'Premium in USDG, upfront'],
+                  ['You receive', 'Premium in USDC, upfront'],
                   ['Max gain', 'Premium plus any rise up to the strike'],
                   ['Protocol fee', '0.5% per trade'],
                 ]}
@@ -160,10 +160,10 @@ export const DOC_GROUPS: DocGroup[] = [
             title: 'How it works',
             body: (
               <>
-                <p>You lock enough USDG to buy the stock at your strike and sell a put. The premium is paid to you upfront.</p>
+                <p>You lock enough USDC to buy the stock at your strike and sell a put. The premium is paid to you upfront.</p>
                 <ul className="docs-list">
-                  <li>At or above the strike at expiry: the put expires worthless. Your USDG unlocks and you keep the premium.</li>
-                  <li>Below the strike: the put is exercised. Your locked USDG buys the stock tokens at the strike, and you keep the premium.</li>
+                  <li>At or above the strike at expiry: the put expires worthless. Your USDC unlocks and you keep the premium.</li>
+                  <li>Below the strike: the put is exercised. Your locked USDC buys the stock tokens at the strike, and you keep the premium.</li>
                 </ul>
               </>
             ),
@@ -179,8 +179,8 @@ export const DOC_GROUPS: DocGroup[] = [
             body: (
               <KeyValues
                 rows={[
-                  ['Collateral', 'USDG: strike multiplied by size'],
-                  ['You receive', 'Premium in USDG, upfront'],
+                  ['Collateral', 'USDC: strike multiplied by size'],
+                  ['You receive', 'Premium in USDC, upfront'],
                   ['If exercised', 'You receive stock tokens at the strike'],
                   ['Protocol fee', '0.5% per trade'],
                 ]}
@@ -199,7 +199,7 @@ export const DOC_GROUPS: DocGroup[] = [
             title: 'How it works',
             body: (
               <>
-                <p>You pick a market, a direction (up or down) and a stake in USDG. At expiry the oracle price decides the outcome.</p>
+                <p>You pick a market, a direction (up or down) and a stake in USDC. At expiry the oracle price decides the outcome.</p>
                 <ul className="docs-list">
                   <li>Right: you collect close to 2x your stake.</li>
                   <li>Wrong: you lose the stake. Nothing more.</li>
@@ -214,7 +214,7 @@ export const DOC_GROUPS: DocGroup[] = [
             body: (
               <KeyValues
                 rows={[
-                  ['Stake', 'USDG'],
+                  ['Stake', 'USDC'],
                   ['Max loss', 'Your stake'],
                   ['Payout if right', 'Close to 2x the stake'],
                   ['Protocol fee', '0.5% per trade'],
@@ -227,7 +227,7 @@ export const DOC_GROUPS: DocGroup[] = [
       {
         slug: 'yield-vault',
         title: 'Yield vault',
-        lead: 'Deposit USDG and let the vault write covered calls on your behalf.',
+        lead: 'Deposit USDC and let the vault write covered calls on your behalf.',
         sections: [
           {
             id: 'how',

@@ -57,7 +57,7 @@ function PositionRow({ p, now }: { p: Position; now: number }) {
 
   const result = p.status === 'closed' ? p.closePnl : p.status === 'settled' ? p.settlePnl : live
   const what = p.product === 'binary' ? `${p.up ? 'Up' : 'Down'} · level ${fmtUsd(p.strike)}` : `Strike ${fmtUsd(p.strike)}`
-  const sizeLabel = p.product === 'binary' ? `${fmtNum(p.size, 2)} USDG stake` : `${fmtNum(p.size)} ${p.product === 'call' ? p.ticker : 'units'}`
+  const sizeLabel = p.product === 'binary' ? `${fmtNum(p.size, 2)} USDC stake` : `${fmtNum(p.size)} ${p.product === 'call' ? p.ticker : 'units'}`
 
   return (
     <article className={`dpos is-${p.status}`}>
@@ -121,7 +121,7 @@ export default function Positions() {
   const open = book.positions.filter((p) => p.status === 'open')
   const history = book.positions.filter((p) => p.status !== 'open')
   const list = tab === 'open' ? open : history
-  const committed = open.reduce((s, p) => s + (p.collateral.symbol === 'USDG' ? p.collateral.amount : p.collateral.amount * (quotes.get(p.collateral.symbol)?.price ?? 0)), 0)
+  const committed = open.reduce((s, p) => s + (p.collateral.symbol === 'USDC' ? p.collateral.amount : p.collateral.amount * (quotes.get(p.collateral.symbol)?.price ?? 0)), 0)
   const realised = history.reduce((s, p) => s + (p.status === 'closed' ? (p.closePnl ?? 0) : (p.settlePnl ?? 0)), 0)
   const premium = book.positions.reduce((s, p) => s + (p.product === 'binary' ? 0 : p.premium * p.size), 0)
 

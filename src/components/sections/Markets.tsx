@@ -13,7 +13,7 @@ import { BrandLogo, type BrandKey } from '@/components/brand/BrandLogo'
 const STACK: { cat: string; logo: BrandKey; label: string }[] = [
   { cat: 'Oracle', logo: 'chainlink', label: 'Chainlink' },
   { cat: 'Network', logo: 'ethereum', label: 'Ethereum' },
-  { cat: 'Collateral', logo: 'usdg', label: 'USDG' },
+  { cat: 'Collateral', logo: 'usdc', label: 'USDC' },
 ]
 
 /** Closed gradient outline around the ticker tile, cut at top-left and bottom-right like the QuiverFi mark. */

@@ -76,4 +76,4 @@ scripts/           logo, social images, sitemap
 public/            static assets, brand exports, robots, manifest
 ```
 
-Names and logos of third-party projects (Chainlink, Ethereum, Ondo Global Markets, USDG) identify the services QuiverFi uses; QuiverFi is not affiliated with them.
+Names and logos of third-party projects (Chainlink, Ethereum, Ondo Global Markets, USDC) identify the services QuiverFi uses; QuiverFi is not affiliated with them.

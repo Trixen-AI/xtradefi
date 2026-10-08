@@ -105,11 +105,11 @@ export function useProtocol() {
     ledger.update(who, (l) => ({ ...l, positions: l.positions.map((x) => (x.id === id && x.status === 'open' ? { ...x, status: 'settled', settlePrice: price, settlePnl: pnl } : x)) }))
   }
 
-  async function vault(action: 'deposit' | 'withdraw', amount: number, usdg: AssetRef) {
+  async function vault(action: 'deposit' | 'withdraw', amount: number, usdc: AssetRef) {
     const who = owner()
     const nonce = ledger.nextNonce(who)
-    const signature = await signTypedDataAsync({ domain: EIP712_DOMAIN, types: EIP712_TYPES, primaryType: 'Vault', message: { owner: who, action, amount: toUnits(amount, usdg.decimals), nonce: BigInt(nonce) } })
-    if (action === 'deposit') spend(usdg.symbol, amount)
+    const signature = await signTypedDataAsync({ domain: EIP712_DOMAIN, types: EIP712_TYPES, primaryType: 'Vault', message: { owner: who, action, amount: toUnits(amount, usdc.decimals), nonce: BigInt(nonce) } })
+    if (action === 'deposit') spend(usdc.symbol, amount)
     ledger.update(who, (l) => ({ ...l, vault: [{ id: `${nonce}-${signature.slice(2, 10)}`, action, amount, at: Math.floor(Date.now() / 1000), signature }, ...l.vault] }))
   }
 

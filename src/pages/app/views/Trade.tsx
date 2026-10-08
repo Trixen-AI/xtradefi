@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
-import { MARKET_BY_TICKER, MARKET_LIST, USDG } from '../data/tokens'
+import { MARKET_BY_TICKER, MARKET_LIST, USDC } from '../data/tokens'
 import { PROTOCOL } from '../data/protocol'
 import { feedState, useNow, useOracles, useRounds, useWalletBalances } from '../hooks/chainData'
 import { bsPremium, payoffAt, probAbove, realisedVol, yearsUntil, type Product } from '../lib/options'
@@ -15,8 +15,8 @@ import { actionError, useProtocol } from '../hooks/useProtocol'
 import { PayoffChart } from '../components/charts'
 
 const PRODUCTS: { id: Product; label: string; hint: string }[] = [
-  { id: 'call', label: 'Covered call', hint: 'Lock stock tokens, sell a call, earn USDG premium upfront.' },
-  { id: 'put', label: 'Cash-secured put', hint: 'Lock USDG, sell a put, earn premium; buy at your strike if it falls there.' },
+  { id: 'call', label: 'Covered call', hint: 'Lock stock tokens, sell a call, earn USDC premium upfront.' },
+  { id: 'put', label: 'Cash-secured put', hint: 'Lock USDC, sell a put, earn premium; buy at your strike if it falls there.' },
   { id: 'binary', label: 'Binary', hint: 'Pick up or down. Right at expiry: collect close to 2x your stake.' },
 ]
 
@@ -73,14 +73,14 @@ export default function Trade() {
   const pWin = pAbove === undefined ? undefined : up ? pAbove : 1 - pAbove
 
   const locked = lockedBySymbol(book)
-  const usdg = Math.max(0, (balances.get('USDG')?.amount ?? 0) - (locked.get('USDG') ?? 0))
+  const usdc = Math.max(0, (balances.get('USDC')?.amount ?? 0) - (locked.get('USDC') ?? 0))
   const tokenBal = Math.max(0, (balances.get(market.ticker)?.amount ?? 0) - (locked.get(market.ticker) ?? 0))
-  const collateral = product === 'call' ? { amount: size, symbol: market.ticker, have: tokenBal } : product === 'put' ? { amount: size * K, symbol: USDG.symbol, have: usdg } : { amount: size, symbol: USDG.symbol, have: usdg }
+  const collateral = product === 'call' ? { amount: size, symbol: market.ticker, have: tokenBal } : product === 'put' ? { amount: size * K, symbol: USDC.symbol, have: usdc } : { amount: size, symbol: USDC.symbol, have: usdc }
   const enough = collateral.amount <= collateral.have + 1e-9
   const validInputs = S > 0 && K > 0 && size > 0 && !!expiry
   const allowance = book.approvals[collateral.symbol]?.amount ?? 0
   const needsApproval = allowance + 1e-9 < collateral.amount
-  const collateralAsset = collateral.symbol === USDG.symbol ? { symbol: USDG.symbol, address: USDG.address, decimals: USDG.decimals } : { symbol: market.ticker, address: market.token, decimals: market.decimals }
+  const collateralAsset = collateral.symbol === USDC.symbol ? { symbol: USDC.symbol, address: USDC.address, decimals: USDC.decimals } : { symbol: market.ticker, address: market.token, decimals: market.decimals }
 
   const setProduct = (p: Product) => {
     setStrikeInput('')
@@ -100,7 +100,7 @@ export default function Trade() {
     }, { replace: true })
   }
 
-  const maxSize = product === 'call' ? tokenBal : product === 'put' ? (K > 0 ? usdg / K : 0) : usdg
+  const maxSize = product === 'call' ? tokenBal : product === 'put' ? (K > 0 ? usdc / K : 0) : usdc
 
   // Recomputed per render on purpose: 160 samples is cheap and keeps the chart in step with every input.
   const f = (x: number) => payoffAt({ product, S, K, size: size > 0 ? size : 1, premium: premium ?? 0, up, winMultiple: PROTOCOL.binaryMaxMultiple }, x)
@@ -280,7 +280,7 @@ export default function Trade() {
           </div>
 
           <div className="dfield">
-            <label htmlFor="t-size">{product === 'binary' ? 'Stake (USDG)' : product === 'call' ? `Size (${market.ticker} tokens)` : `Size (${market.ticker} units)`}</label>
+            <label htmlFor="t-size">{product === 'binary' ? 'Stake (USDC)' : product === 'call' ? `Size (${market.ticker} tokens)` : `Size (${market.ticker} units)`}</label>
             <div className="dinput-wrap">
               <input id="t-size" className="dinput" inputMode="decimal" placeholder="0.0" value={sizeInput} onChange={(e) => setSizeInput(e.target.value)} />
               <button type="button" className="dinput-max" disabled={!isConnected || maxSize <= 0} onClick={() => setSizeInput(String(Math.floor(maxSize * 10_000) / 10_000))}>

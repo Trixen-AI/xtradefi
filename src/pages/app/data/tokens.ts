@@ -9,7 +9,7 @@ import { MARKETS } from '@/data/site'
 //   Chainlink feeds (standard proxies, 8 decimals, 24h heartbeat, 0.5% deviation, US equities 24/5): Chainlink
 //     reference data directory feeds-mainnet.json; every proxy read on-chain. Ethereum only has equity feeds for
 //     NVDA, TSLA, GOOGL, SPY and QQQ, so only those markets can be traded; the rest are listed without options.
-//   USDG: globaldollar.com (Etherscan link) + on-chain symbol/decimals; USDG/USD and ETH/USD Chainlink proxies.
+//   USDC: Circle USD Coin, symbol/name/decimals read on-chain; USDC/USD and ETH/USD Chainlink proxies read on-chain.
 
 type Raw = { t: string; token: string; feed?: string }
 
@@ -63,8 +63,8 @@ export const MARKET_LIST: Market[] = RAW.map((r) => ({
 
 export const MARKET_BY_TICKER = new Map(MARKET_LIST.map((m) => [m.ticker, m]))
 
-export const USDG = { symbol: 'USDG', name: 'Global Dollar', address: lc('0xe343167631d89B6Ffc58B88d6b7fB0228795491D'), decimals: 6 } as const
-export const USDG_FEED = lc('0x14f0737d6b705259e521EA6E9E3506AC78dBd311')
+export const USDC = { symbol: 'USDC', name: 'USD Coin', address: lc('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'), decimals: 6 } as const
+export const USDC_FEED = lc('0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6')
 export const ETH_FEED = lc('0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419')
 
 /** Ondo SyntheticSharesOracle: getSValue(token) → shares per token (1e18 = 1.0). Reverts for tokens with no

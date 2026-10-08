@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { MARKET_LIST, USDG } from '../data/tokens'
+import { MARKET_LIST, USDC } from '../data/tokens'
 import { lockedBySymbol, useLedger, vaultBalance } from '../lib/ledger'
 import { PRODUCT_LABEL } from '../lib/positions'
 import { fmtExpiry } from '../lib/time'
@@ -21,7 +21,7 @@ export default function Overview() {
   const locked = lockedBySymbol(book)
   const openPositions = book.positions.filter((p) => p.status === 'open')
 
-  const usdgPrice = quotes.get('USDG')?.price ?? 1
+  const usdcPrice = quotes.get('USDC')?.price ?? 1
   const ethPrice = quotes.get('ETH')?.price
 
   // Holdings valued at the oracle price; tokens without a feed are listed but not valued.
@@ -34,12 +34,12 @@ export default function Overview() {
       }).filter((h) => h.bal > 0),
     [balances, quotes, sValues],
   )
-  const usdg = balances.get('USDG')?.amount ?? 0
-  const freeUsdg = Math.max(0, usdg - (locked.get('USDG') ?? 0))
+  const usdc = balances.get('USDC')?.amount ?? 0
+  const freeUsdc = Math.max(0, usdc - (locked.get('USDC') ?? 0))
   const inVault = vaultBalance(book)
   const stockValue = holdings.reduce((s, h) => s + (h.value ?? 0), 0)
   const unpriced = holdings.filter((h) => h.value === undefined).length
-  const portfolio = usdg * usdgPrice + stockValue + (eth && ethPrice ? eth.amount * ethPrice : 0)
+  const portfolio = usdc * usdcPrice + stockValue + (eth && ethPrice ? eth.amount * ethPrice : 0)
   const snapshot = MARKET_LIST.filter((m) => m.tradable).slice(0, 8)
 
   return (
@@ -63,15 +63,15 @@ export default function Overview() {
           <div className="dhero__inner">
             <div>
               <h2 className="dhero__title">Connect an EVM wallet</h2>
-              <p className="dhero__text">See your USDG and stock-token balances on Ethereum, what you can use as collateral, and build option positions on live Chainlink prices. No sign-up, no email, no KYC.</p>
+              <p className="dhero__text">See your USDC and stock-token balances on Ethereum, what you can use as collateral, and build option positions on live Chainlink prices. No sign-up, no email, no KYC.</p>
             </div>
             <ConnectCta />
           </div>
         </Panel>
       ) : (
         <div className="dstats">
-          <Stat label="Portfolio value" value={isLoading ? <Skel w={120} /> : fmtUsd(portfolio)} sub={unpriced ? `${unpriced} holding${unpriced > 1 ? 's' : ''} without an oracle price not included` : 'USDG, stock tokens and ETH at oracle prices'} />
-          <Stat label="USDG" value={isLoading ? <Skel /> : fmtNum(usdg, 2)} sub={locked.get('USDG') ? `${fmtNum(freeUsdg, 2)} free · ${fmtNum(locked.get('USDG'), 2)} in positions and the vault` : 'Collateral for puts, binaries and the vault'} />
+          <Stat label="Portfolio value" value={isLoading ? <Skel w={120} /> : fmtUsd(portfolio)} sub={unpriced ? `${unpriced} holding${unpriced > 1 ? 's' : ''} without an oracle price not included` : 'USDC, stock tokens and ETH at oracle prices'} />
+          <Stat label="USDC" value={isLoading ? <Skel /> : fmtNum(usdc, 2)} sub={locked.get('USDC') ? `${fmtNum(freeUsdc, 2)} free · ${fmtNum(locked.get('USDC'), 2)} in positions and the vault` : 'Collateral for puts, binaries and the vault'} />
           <Stat label="Stock tokens" value={isLoading ? <Skel /> : fmtUsd(stockValue)} sub={`${holdings.length} market${holdings.length === 1 ? '' : 's'} held`} />
           <Stat label="ETH (gas)" value={isLoading || !eth ? <Skel /> : fmtNum(eth.amount, 5)} sub={eth && ethPrice ? fmtUsd(eth.amount * ethPrice) : 'Network fees on Ethereum'} />
         </div>
@@ -83,7 +83,7 @@ export default function Overview() {
             <ul className="dcap">
               <li>
                 <span className="dcap__name">Cash-secured puts · binaries · vault</span>
-                <span className="dcap__val">{fmtNum(freeUsdg, 2)} USDG free</span>
+                <span className="dcap__val">{fmtNum(freeUsdc, 2)} USDC free</span>
                 <a className="dbtn dbtn--sm" href="/app/trade?product=put">
                   Sell a put
                 </a>
@@ -128,7 +128,7 @@ export default function Overview() {
                   <li>
                     <a href="/app/vault">
                       <b>Vault</b>
-                      <span>{fmtNum(inVault, 2)} USDG deposited</span>
+                      <span>{fmtNum(inVault, 2)} USDC deposited</span>
                       <small>Covered-call strategy</small>
                     </a>
                   </li>
@@ -149,7 +149,7 @@ export default function Overview() {
             <div className="dtable-loading">
               <Skel w={240} />
             </div>
-          ) : holdings.length || usdg > 0 ? (
+          ) : holdings.length || usdc > 0 ? (
             <div className="dtable-wrap">
               <table className="dtable">
                 <thead>
@@ -162,22 +162,22 @@ export default function Overview() {
                   </tr>
                 </thead>
                 <tbody>
-                  {usdg > 0 ? (
+                  {usdc > 0 ? (
                     <tr>
                       <td>
                         <span className="dasset">
-                          <TickerBadge ticker="USDG" />
+                          <TickerBadge ticker="USDC" />
                           <span>
-                            <b>USDG</b>
-                            <small>{USDG.name}</small>
+                            <b>USDC</b>
+                            <small>{USDC.name}</small>
                           </span>
                         </span>
                       </td>
-                      <td className="num">{fmtNum(usdg, 2)}</td>
-                      <td className="num">{fmtUsd(usdgPrice)}</td>
-                      <td className="num">{fmtUsd(usdg * usdgPrice)}</td>
+                      <td className="num">{fmtNum(usdc, 2)}</td>
+                      <td className="num">{fmtUsd(usdcPrice)}</td>
+                      <td className="num">{fmtUsd(usdc * usdcPrice)}</td>
                       <td className="act">
-                        <AddTokenButton address={USDG.address} symbol="USDG" decimals={USDG.decimals} />
+                        <AddTokenButton address={USDC.address} symbol="USDC" decimals={USDC.decimals} />
                       </td>
                     </tr>
                   ) : null}
@@ -204,8 +204,8 @@ export default function Overview() {
               </table>
             </div>
           ) : (
-            <Empty title="No USDG or stock tokens in this wallet" action={<a className="dbtn dbtn--sm" href="/docs/getting-started">How to get started</a>}>
-              Fund this address on Ethereum with USDG for puts, binaries and the vault, or with stock tokens for covered calls.
+            <Empty title="No USDC or stock tokens in this wallet" action={<a className="dbtn dbtn--sm" href="/docs/getting-started">How to get started</a>}>
+              Fund this address on Ethereum with USDC for puts, binaries and the vault, or with stock tokens for covered calls.
             </Empty>
           )}
         </Panel>

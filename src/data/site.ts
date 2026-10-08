@@ -69,10 +69,10 @@ export const SECTIONS = [
 
 /* Hero: each order cycles through the prompt list, the status box and the four rows on the right. */
 export const HERO_ORDERS = [
-  { prompt: 'Sell a 7-day covered call on my NVDA tokens', status: 'Writing on…', tool: 'Covered call', rows: ['Collateral: NVDA tokens', 'Premium paid in USDG', 'Custom strike', 'Settles at expiry'] },
-  { prompt: 'Write a cash-secured put on TSLA at my strike', status: 'Locking…', tool: 'Cash-secured put', rows: ['Collateral: USDG', 'Premium paid upfront', 'Buy the dip at strike', 'Oracle-priced expiry'] },
+  { prompt: 'Sell a 7-day covered call on my NVDA tokens', status: 'Writing on…', tool: 'Covered call', rows: ['Collateral: NVDA tokens', 'Premium paid in USDC', 'Custom strike', 'Settles at expiry'] },
+  { prompt: 'Write a cash-secured put on TSLA at my strike', status: 'Locking…', tool: 'Cash-secured put', rows: ['Collateral: USDC', 'Premium paid upfront', 'Buy the dip at strike', 'Oracle-priced expiry'] },
   { prompt: 'Bet GOOGL closes above today’s price by Friday', status: 'Opening…', tool: 'Binary option', rows: ['Pick up or down', 'Near 2x payout', 'Fixed stake', 'Paid out on-chain'] },
-  { prompt: 'Put my idle USDG to work on autopilot', status: 'Depositing…', tool: 'Yield vault', rows: ['Auto-written calls', 'Compounding premium', 'No active management', 'Withdraw any time'] },
+  { prompt: 'Put my idle USDC to work on autopilot', status: 'Depositing…', tool: 'Yield vault', rows: ['Auto-written calls', 'Compounding premium', 'No active management', 'Withdraw any time'] },
   { prompt: 'Settle my QQQ position at the oracle price', status: 'Settling via…', tool: 'Chainlink oracle', rows: ['Price pulled on-chain', 'Same-call settlement', 'Instant payout', 'No manual steps'] },
 ]
 
@@ -91,7 +91,7 @@ export const TRACK = {
     'Binary options',
     'Yield vault',
     'Chainlink settlement',
-    'One USDG balance',
+    'One USDC balance',
     'Custom strikes',
     '24/5 markets',
     'No KYC',
@@ -121,15 +121,15 @@ export const PRODUCTS: { title: string; items: Product[] } = {
     {
       kind: 'call',
       title: ['Covered', 'Calls'],
-      body: 'Lock the stock tokens you already hold and sell call options against them. The USDG premium lands in your wallet upfront, whatever the stock does next.',
-      feats: ['Earn premium', 'Yield strategy', 'Stock tokens as collateral', 'Choose strike and expiry', 'Paid in USDG upfront'],
+      body: 'Lock the stock tokens you already hold and sell call options against them. The USDC premium lands in your wallet upfront, whatever the stock does next.',
+      feats: ['Earn premium', 'Yield strategy', 'Stock tokens as collateral', 'Choose strike and expiry', 'Paid in USDC upfront'],
       ctas: [{ label: 'Write a covered call', href: LINKS.app }],
     },
     {
       kind: 'put',
       title: ['Cash-Secured', 'Puts'],
-      body: 'Lock USDG and sell a put. You keep the premium now, and if the stock falls to your strike by expiry you buy it at the price you picked.',
-      feats: ['Buy the dip', 'Earn income', 'USDG as collateral', 'Strike you choose', 'Premium paid upfront'],
+      body: 'Lock USDC and sell a put. You keep the premium now, and if the stock falls to your strike by expiry you buy it at the price you picked.',
+      feats: ['Buy the dip', 'Earn income', 'USDC as collateral', 'Strike you choose', 'Premium paid upfront'],
       ctas: [{ label: 'Sell a put', href: LINKS.app }],
     },
     {
@@ -142,8 +142,8 @@ export const PRODUCTS: { title: string; items: Product[] } = {
     {
       kind: 'vault',
       title: ['Yield', 'Vault'],
-      body: 'Deposit USDG and the vault writes covered calls for you, rolling premium back in each cycle. Compounding yield without watching a chart.',
-      feats: ['Automated', 'Compounding', 'Covered calls on autopilot', 'No active management', 'Deposit USDG once'],
+      body: 'Deposit USDC and the vault writes covered calls for you, rolling premium back in each cycle. Compounding yield without watching a chart.',
+      feats: ['Automated', 'Compounding', 'Covered calls on autopilot', 'No active management', 'Deposit USDC once'],
       ctas: [{ label: 'Deposit to the vault', href: LINKS.app }],
     },
   ],
@@ -166,9 +166,9 @@ export const LAYERS = {
   headBoxed: 'Protocol',
   side: 'What happens between your click and your payout, one layer at a time.',
   items: [
-    { n: '01', title: 'Wallet Layer', nodes: ['EVM wallet', 'One-click connect', 'No KYC', 'Sign once'], center: 'wallet', chips: ['USDG deposit', 'Stock tokens'] },
+    { n: '01', title: 'Wallet Layer', nodes: ['EVM wallet', 'One-click connect', 'No KYC', 'Sign once'], center: 'wallet', chips: ['USDC deposit', 'Stock tokens'] },
     { n: '02', title: 'Product Layer', nodes: ['Covered calls', 'Cash-secured puts', 'Binary options', 'Yield vault'], center: 'x', chips: ['Strike', 'Expiry', 'Size'] },
-    { n: '03', title: 'Margin Layer', nodes: ['One USDG balance', 'Collateral lock', 'Cross-market margin', 'Fee 0.5%'], center: 'coin', chips: ['Locked', 'Free'] },
+    { n: '03', title: 'Margin Layer', nodes: ['One USDC balance', 'Collateral lock', 'Cross-market margin', 'Fee 0.5%'], center: 'coin', chips: ['Locked', 'Free'] },
     { n: '04', title: 'Settlement Layer', nodes: ['Chainlink feed', 'Expiry check', 'Auto-settle', 'Payout'], center: 'oracle', chips: ['30s updates', 'Same-call payout'] },
   ],
 }
@@ -181,9 +181,9 @@ export const FEES = {
   toggle: ['Show protocol info', 'Show product fees'],
   products: [
     { name: 'Covered Calls', icon: 'call', rows: [['Protocol fee', '0.5%'], ['Collateral', 'Stock tokens']] },
-    { name: 'Cash-Secured Puts', icon: 'put', rows: [['Protocol fee', '0.5%'], ['Collateral', 'USDG']] },
+    { name: 'Cash-Secured Puts', icon: 'put', rows: [['Protocol fee', '0.5%'], ['Collateral', 'USDC']] },
     { name: 'Binary Options', icon: 'binary', rows: [['Protocol fee', '0.5%'], ['Max payout', 'Near 2x']] },
-    { name: 'Yield Vault', icon: 'vault', rows: [['Protocol fee', '0.5%'], ['Deposit', 'USDG']] },
+    { name: 'Yield Vault', icon: 'vault', rows: [['Protocol fee', '0.5%'], ['Deposit', 'USDC']] },
   ],
   info: [
     { name: 'Network', icon: 'network', rows: [['Chain', 'Ethereum'], ['Chain ID', '1']] },
@@ -278,16 +278,16 @@ export const FAQ = {
   items: [
     [
       { q: 'What is an on-chain option?', a: 'An option is a contract that gives the buyer the right, but not the obligation, to buy or sell an asset at a set price before a set date. On QuiverFi the whole lifecycle runs in smart contracts: creation, margin, expiry and settlement. No counterparty can default and nobody can freeze your funds.' },
-      { q: 'What do I need to start?', a: 'An EVM wallet on Ethereum and some USDG. To write covered calls you also need the stock tokens you want to write against. There is no sign-up and no KYC.' },
+      { q: 'What do I need to start?', a: 'An EVM wallet on Ethereum and some USDC. To write covered calls you also need the stock tokens you want to write against. There is no sign-up and no KYC.' },
       { q: 'Do I own the underlying stocks?', a: 'You hold tokenized stocks: tokens that track the price of the listed share. QuiverFi lets you write and buy options on those tokens. It does not give you shareholder rights in the company itself.' },
     ],
     [
       { q: 'How does settlement work?', a: 'Chainlink price feeds update every 30 seconds, with deviation triggers in between. At expiry the oracle price is pulled on-chain and every position in that market settles in the same call. Payouts are calculated and sent immediately, with no manual step.' },
-      { q: 'What is the Yield Vault?', a: 'A pool that writes covered calls for you. You deposit USDG, the vault sells calls each cycle and rolls the premium back in, so yield compounds without you managing positions.' },
+      { q: 'What is the Yield Vault?', a: 'A pool that writes covered calls for you. You deposit USDC, the vault sells calls each cycle and rolls the premium back in, so yield compounds without you managing positions.' },
       { q: 'Which network does QuiverFi run on?', a: 'Ethereum mainnet, chain ID 1. The main contract address will be published in the docs at launch.' },
     ],
     [
-      { q: 'Can I lose more than I deposit?', a: 'No. Every position is fully collateralized when it opens: stock tokens for covered calls, USDG for puts and binaries. The most you can lose is the collateral or stake you locked.' },
+      { q: 'Can I lose more than I deposit?', a: 'No. Every position is fully collateralized when it opens: stock tokens for covered calls, USDC for puts and binaries. The most you can lose is the collateral or stake you locked.' },
       { q: 'What does it cost?', a: 'A 0.5% protocol fee per trade. Premiums, payouts and collateral move between wallets and the contract; there is no subscription and no withdrawal fee.' },
       { q: 'Is QuiverFi affiliated with the stocks it lists?', a: 'No. Tickers and company names identify the tokenized assets. QuiverFi is an independent protocol and is not affiliated with or endorsed by those companies.' },
     ],
@@ -302,7 +302,7 @@ export const CTA = {
   stack: [
     { key: 'chainlink', name: 'Chainlink', handle: 'Oracle provider', body: 'Price feeds update every 30 seconds and set the final price at every expiry.' },
     { key: 'ethereum', name: 'Ethereum', handle: 'Network · Mainnet', body: 'Every position, lock and payout lives on Ethereum mainnet.' },
-    { key: 'usdg', name: 'USDG', handle: 'Collateral & premium', body: 'One stablecoin balance covers margin and receives premium across all markets.' },
+    { key: 'usdc', name: 'USDC', handle: 'Collateral & premium', body: 'One stablecoin balance covers margin and receives premium across all markets.' },
     { key: 'wallet', name: 'EVM wallet', handle: 'Wallet', body: 'Connect any EVM wallet. No account, no email, no KYC.' },
   ],
 }

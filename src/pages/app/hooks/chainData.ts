@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { formatUnits, type Address } from 'viem'
 import { useBalance, useReadContract, useReadContracts } from 'wagmi'
 import { ethereumChain } from '../wallet/chain'
-import { aggregatorAbi, erc20Abi, ETH_FEED, FEED_DECIMALS, FEED_HEARTBEAT_S, MARKET_LIST, ONDO_SVALUE_ORACLE, sValueAbi, USDG, USDG_FEED } from '../data/tokens'
+import { aggregatorAbi, erc20Abi, ETH_FEED, FEED_DECIMALS, FEED_HEARTBEAT_S, MARKET_LIST, ONDO_SVALUE_ORACLE, sValueAbi, USDC, USDC_FEED } from '../data/tokens'
 import { isMarketSession } from '../lib/time'
 import type { Round } from '../lib/options'
 
@@ -26,7 +26,7 @@ export type Quote = { price: number; updatedAt: number; roundId: bigint }
 
 const FEEDS: { key: string; address: Address }[] = [
   ...MARKET_LIST.filter((m) => m.feed).map((m) => ({ key: m.ticker, address: m.feed! })),
-  { key: 'USDG', address: USDG_FEED },
+  { key: 'USDC', address: USDC_FEED },
   { key: 'ETH', address: ETH_FEED },
 ]
 
@@ -62,11 +62,11 @@ export function feedState(q: Quote | undefined, now: number): FeedState {
 // ---------- wallet balances ----------
 
 const BALANCE_TOKENS: { key: string; address: Address; decimals: number }[] = [
-  { key: 'USDG', address: USDG.address, decimals: USDG.decimals },
+  { key: 'USDC', address: USDC.address, decimals: USDC.decimals },
   ...MARKET_LIST.map((m) => ({ key: m.ticker, address: m.token, decimals: m.decimals })),
 ]
 
-/** ETH, USDG and every stock-token balance of an address on Ethereum. */
+/** ETH, USDC and every stock-token balance of an address on Ethereum. */
 export function useWalletBalances(address?: Address) {
   const enabled = !!address
   const eth = useBalance({ address, chainId, query: { enabled, refetchInterval: 15_000 } })

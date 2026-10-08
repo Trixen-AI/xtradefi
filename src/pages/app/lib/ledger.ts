@@ -13,7 +13,7 @@ export type Position = {
   up: boolean
   strike: number
   expiry: number // unix seconds
-  size: number // tokens (call), units (put) or USDG stake (binary)
+  size: number // tokens (call), units (put) or USDC stake (binary)
   premium: number // USD per unit at open (model), 0 for binary
   spotAtOpen: number
   collateral: { symbol: string; amount: number }
@@ -109,7 +109,7 @@ export function lockedBySymbol(l: Ledger) {
   const out = new Map<string, number>()
   for (const p of l.positions) if (p.status === 'open') out.set(p.collateral.symbol, (out.get(p.collateral.symbol) ?? 0) + p.collateral.amount)
   const vault = l.vault.reduce((s, v) => s + (v.action === 'deposit' ? v.amount : -v.amount), 0)
-  if (vault > 0) out.set('USDG', (out.get('USDG') ?? 0) + vault)
+  if (vault > 0) out.set('USDC', (out.get('USDC') ?? 0) + vault)
   return out
 }
 
