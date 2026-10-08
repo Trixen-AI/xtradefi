@@ -6,7 +6,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const ORIGIN = 'https://quiverfi.org'
+const ORIGIN = 'https://quiverfi.world'
 
 const docs = fs.readFileSync(path.join(root, 'src/pages/docs/content.tsx'), 'utf8')
 const slugs = [...docs.matchAll(/slug: '([a-z0-9-]+)'/g)].map((m) => m[1])

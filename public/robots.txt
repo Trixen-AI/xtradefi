@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /app
 
-Sitemap: https://quiverfi.org/sitemap.xml
+Sitemap: https://quiverfi.world/sitemap.xml

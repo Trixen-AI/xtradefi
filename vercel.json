@@ -7,8 +7,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.quiverfi.org" }],
-      "destination": "https://quiverfi.org/:path*",
+      "has": [{ "type": "host", "value": "www.quiverfi.world" }],
+      "destination": "https://quiverfi.world/:path*",
       "permanent": true
     }
   ],

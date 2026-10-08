@@ -81,7 +81,7 @@ const W = 1200
 const H = 630
 const headline = outline(sans, 'On-chain options on tokenized stocks.', 50, -0.4)
 const products = outline(mono, 'COVERED CALLS  ·  PUTS  ·  BINARIES  ·  YIELD VAULT', 19, 1.2)
-const domain = outline(mono, 'quiverfi.org', 24, 0.5)
+const domain = outline(mono, 'quiverfi.world', 24, 0.5)
 const chain = outline(mono, 'ETHEREUM  ·  CHAINLINK SETTLED', 17, 1)
 
 const lockScale = 2.2 // lockup is 48 high → 105.6 px

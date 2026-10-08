@@ -1,7 +1,7 @@
 // Per-route head tags for the single-page app. index.html carries the defaults for "/"; routes that differ
 // (docs pages, the dashboard) update title, description, canonical, Open Graph and robots on mount.
 
-export const SITE_ORIGIN = 'https://quiverfi.org'
+export const SITE_ORIGIN = 'https://quiverfi.world'
 export const DEFAULT_TITLE = 'QuiverFi · On-chain options on tokenized stocks'
 export const DEFAULT_DESCRIPTION = 'Trade covered calls, cash-secured puts and binary options on tokenized NVDA, TSLA, GOOGL, SPY and QQQ. Settled on-chain by Chainlink oracles on Ethereum. No KYC.'
 
